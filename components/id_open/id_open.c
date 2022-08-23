@@ -484,8 +484,11 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 	
 	text[0] = 0;
 	msecs += 100;
+	if (msecs > 900)
+	{
+		secs += 1;	
+	}
 	
-	secs += 1;
 	
 	if ((!system_data->OperatorLatitude)&&(utm_data->base_valid)) 
 	{

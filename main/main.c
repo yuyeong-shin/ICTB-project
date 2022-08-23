@@ -29,7 +29,7 @@
 #define TIME_ZONE			(+9)		// Korea
 #define YEAR_BASE			(2000)		// data in GPS starts from 2000
 
-#define ESP_TIMER_PERIOD	1000			// ms
+#define ESP_TIMER_PERIOD	100			// ms
 static SemaphoreHandle_t sem_;
 static SemaphoreHandle_t mut_;
 	
@@ -66,8 +66,8 @@ static void task_opendroneid_wifi(void *arg)
 		{
 			
 			xSemaphoreTakeRecursive(mut_, (TickType_t) 10);
-			printf("Semaphore take count: %d, Tick: %d\r\n", take_count++, xTaskGetTickCount());
-			printf("%.7f\r\n", utm_data.latitude_d);
+//			printf("Semaphore take count: %d, Tick: %d\r\n", take_count++, xTaskGetTickCount());
+//			printf("%.7f\r\n", utm_data.latitude_d);
 			ID_OpenDrone_transmit(&utm_data);
 			//ID_OpenDrone_transmit_wifi(&utm_data);
 			xSemaphoreGiveRecursive(mut_);
@@ -90,6 +90,7 @@ static void task_opendroneid_wifi(void *arg)
 static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_base, int32_t event_id, void *event_data)
 {
 	gps_t *gps = NULL;
+//	printf("GPS Inttt\r\n");
 	switch (event_id) {
 	case GPS_UPDATE:
 		gps = (gps_t *)event_data;
@@ -110,7 +111,22 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 			gps->longitude,
 			gps->altitude,
 			gps->speed);
-		utm_data.latitude_d += 0.1;
+		utm_data.years = (int)gps->date.year + YEAR_BASE;
+		utm_data.months = (int)gps->date.month;
+		utm_data.days = (int)gps->date.day;
+		utm_data.hours = (int)gps->tim.hour + TIME_ZONE;
+		utm_data.minutes = (int)gps->tim.minute;
+		utm_data.seconds = (int)gps->tim.second;
+		utm_data.csecs = (int)gps->tim.thousand;
+		
+		utm_data.satellites = (int)gps->sats_in_use;
+		
+		utm_data.latitude_d = (double)gps->latitude;
+		utm_data.longitude_d = (double)gps->longitude;
+		utm_data.alt_agl_m = gps->altitude;
+		utm_data.heading = (int)gps->cog;
+		utm_data.speed_kn = (int)gps->speed;
+			
 		break;
 	case GPS_UNKNOWN:
 		/* print unknown statements */
@@ -146,7 +162,7 @@ void app_main(void)
 	memset(&utm_parameters, 0, sizeof(utm_parameters));
 	strcpy(utm_parameters.UAS_operator, "FIN-OP-1234567");
 	
-	utm_parameters.region			= 1;
+	utm_parameters.region			= 2;
 	utm_parameters.EU_category		= 2;
 	
 	ID_OpenDrone_param_init(&utm_parameters);
@@ -185,15 +201,10 @@ void app_main(void)
 	xTaskCreate(task_opendroneid_wifi, "WIFI", 4096, NULL, PRIO_TASK_WIFI, NULL);
 	
 	// GPS Test data
-	utm_data.base_latitude  = 61.0 + (26.0 / 60.0) + (48.51 / 3600.0);
-	utm_data.base_longitude = 23.0 + (51.0 / 60.0) + (17.27 / 3600.0);
-	utm_data.base_alt_m     = 150.0;
+	utm_data.base_latitude  = 36.740751;
+	utm_data.base_longitude = 127.119139;
+	utm_data.base_alt_m     = 80.0;
 
-	utm_data.latitude_d  = 60.0 + (11.0 / 60.0) + (47.79 / 3600.0);
-	utm_data.longitude_d = 24.0 + (56.0 / 60.0) + (42.37 / 3600.0);
-	utm_data.alt_msl_m   = 200.0;
-
-	utm_data.satellites = 8;
 	utm_data.base_valid = 1;
 	
 	while (1)

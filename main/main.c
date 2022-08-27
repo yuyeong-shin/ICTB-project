@@ -21,6 +21,7 @@
 
 #include "id_open.h"
 #include "nmea_parser.h"
+#include "katech_esp_gpio.h"
 
 #define STATS_TICKS         pdMS_TO_TICKS(1000)
 #define PRIO_TASK_WIFI      3
@@ -58,7 +59,7 @@ static void timer_init(void)
 }
 static void task_opendroneid_wifi(void *arg)
 {
-	static int take_count = 0;
+	//static int take_count = 0;
 	
 	while (1)
 	{
@@ -139,7 +140,7 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 
 void app_main(void)
 {
-	TickType_t tick = 0;
+	//TickType_t tick = 0;
 	
 	esp_err_t ret = nvs_flash_init();
 	if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
@@ -175,6 +176,9 @@ void app_main(void)
 	nmea_parser_handle_t nmea_hdl = nmea_parser_init(&config);
 	
 	nmea_parser_add_handler(nmea_hdl, gps_event_handler, NULL);
+	
+	// for Switch Input (GPIO interrupt)
+	katech_esp_gpio_init();
 	
 	// Timer Start
 	timer_init();

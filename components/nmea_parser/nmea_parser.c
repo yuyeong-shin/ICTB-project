@@ -495,7 +495,7 @@ static esp_err_t gps_decode(esp_gps_t *esp_gps, size_t len)
 		}
 		/* End of statement */
 		else if(*d == '\r') {
-			/* Convert received CRC from string (hex) to number */
+		/* Convert received CRC from string (hex) to number */
 			uint8_t crc = (uint8_t)strtol(esp_gps->item_str, NULL, 16);
 			/* CRC passed */
 			if (esp_gps->crc == crc) {
@@ -536,7 +536,8 @@ static esp_err_t gps_decode(esp_gps_t *esp_gps, size_t len)
 					break;
 				}
 				/* Check if all statements have been parsed */
-				if (((esp_gps->parsed_statement) & esp_gps->all_statements) == esp_gps->all_statements) {
+//				if (((esp_gps->parsed_statement) & esp_gps->all_statements) == esp_gps->all_statements) {
+				if (esp_gps->parsed_statement) {
 					esp_gps->parsed_statement = 0;
 					/* Send signal to notify that GPS information has been updated */
 					esp_event_post_to(esp_gps->event_loop_hdl,
@@ -589,6 +590,7 @@ static void esp_handle_uart_pattern(esp_gps_t *esp_gps)
 		int read_len = uart_read_bytes(esp_gps->uart_port, esp_gps->buffer, pos + 1, 100 / portTICK_PERIOD_MS);
 		/* make sure the line is a standard string */
 		esp_gps->buffer[read_len] = '\0';
+		
 		/* Send new line to handle */
 		if (gps_decode(esp_gps, read_len + 1) != ESP_OK) {
 			ESP_LOGW(GPS_TAG, "GPS decode line failed");

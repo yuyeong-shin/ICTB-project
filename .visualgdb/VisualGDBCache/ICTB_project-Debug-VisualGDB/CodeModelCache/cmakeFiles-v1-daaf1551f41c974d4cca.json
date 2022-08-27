@@ -1015,6 +1015,9 @@
 			"path" : "main/CMakeLists.txt"
 		},
 		{
+			"path" : "components/gpio/CMakeLists.txt"
+		},
+		{
 			"path" : "components/id_open/CMakeLists.txt"
 		},
 		{

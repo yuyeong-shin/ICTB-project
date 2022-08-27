@@ -831,7 +831,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "96"
+			"value" : "97"
 		},
 		{
 			"name" : "CMAKE_OBJCOPY",
@@ -1952,6 +1952,18 @@
 			],
 			"type" : "STATIC",
 			"value" : "general;__idf_cxx;general;__idf_newlib;general;__idf_esp_hw_support;general;__idf_heap;general;__idf_log;general;__idf_lwip;general;__idf_soc;general;__idf_hal;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_system;"
+		},
+		{
+			"name" : "__idf_gpio_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;__idf_cxx;general;__idf_newlib;general;__idf_freertos;general;__idf_esp_hw_support;general;__idf_heap;general;__idf_log;general;__idf_lwip;general;__idf_soc;general;__idf_hal;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_system;"
 		},
 		{
 			"name" : "__idf_hal_LIB_DEPENDS",

@@ -20,24 +20,24 @@
 					"targetIndexes" : 
 					[
 						0,
-						77,
-						79,
-						82,
-						84,
-						86,
+						78,
+						80,
+						83,
+						85,
 						87,
 						88,
-						96,
-						98,
+						89,
+						97,
 						99,
 						100,
-						106,
+						101,
 						107,
-						115,
+						108,
 						116,
 						117,
 						118,
-						119
+						119,
+						120
 					]
 				},
 				{
@@ -128,7 +128,8 @@
 						92,
 						93,
 						94,
-						95
+						95,
+						96
 					],
 					"hasInstallRule" : true,
 					"minimumCMakeVersion" : 
@@ -165,13 +166,13 @@
 					"targetIndexes" : 
 					[
 						11,
-						89,
 						90,
 						91,
 						92,
 						93,
-						113,
-						114
+						94,
+						114,
+						115
 					]
 				},
 				{
@@ -232,8 +233,8 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/mbedtls",
 					"targetIndexes" : 
 					[
-						50,
-						85
+						51,
+						86
 					]
 				},
 				{
@@ -254,7 +255,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/mbedtls/mbedtls",
 					"targetIndexes" : 
 					[
-						78
+						79
 					]
 				},
 				{
@@ -290,10 +291,10 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/mbedtls/mbedtls/library",
 					"targetIndexes" : 
 					[
-						101,
 						102,
 						103,
-						104
+						104,
+						105
 					]
 				},
 				{
@@ -307,8 +308,8 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/bootloader",
 					"targetIndexes" : 
 					[
-						83,
-						95
+						84,
+						96
 					]
 				},
 				{
@@ -322,9 +323,9 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/esptool_py",
 					"targetIndexes" : 
 					[
-						80,
 						81,
-						94
+						82,
+						95
 					]
 				},
 				{
@@ -338,12 +339,12 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/partition_table",
 					"targetIndexes" : 
 					[
-						97,
-						108,
+						98,
 						109,
 						110,
 						111,
-						112
+						112,
+						113
 					]
 				},
 				{
@@ -385,7 +386,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/spi_flash",
 					"targetIndexes" : 
 					[
-						64
+						65
 					]
 				},
 				{
@@ -399,7 +400,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/nvs_flash",
 					"targetIndexes" : 
 					[
-						56
+						57
 					]
 				},
 				{
@@ -413,7 +414,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/pthread",
 					"targetIndexes" : 
 					[
-						61
+						62
 					]
 				},
 				{
@@ -474,8 +475,8 @@
 					"targetIndexes" : 
 					[
 						32,
-						76,
-						105
+						77,
+						106
 					]
 				},
 				{
@@ -527,7 +528,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/hal",
 					"targetIndexes" : 
 					[
-						41
+						42
 					]
 				},
 				{
@@ -541,7 +542,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/vfs",
 					"targetIndexes" : 
 					[
-						71
+						72
 					]
 				},
 				{
@@ -569,7 +570,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/tcpip_adapter",
 					"targetIndexes" : 
 					[
-						67
+						68
 					]
 				},
 				{
@@ -611,7 +612,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/wpa_supplicant",
 					"targetIndexes" : 
 					[
-						74
+						75
 					]
 				},
 				{
@@ -673,7 +674,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/lwip",
 					"targetIndexes" : 
 					[
-						48
+						49
 					]
 				},
 				{
@@ -687,7 +688,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/log",
 					"targetIndexes" : 
 					[
-						47
+						48
 					]
 				},
 				{
@@ -701,7 +702,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/heap",
 					"targetIndexes" : 
 					[
-						42
+						43
 					]
 				},
 				{
@@ -719,7 +720,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/soc",
 					"targetIndexes" : 
 					[
-						63
+						64
 					]
 				},
 				{
@@ -771,7 +772,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/xtensa",
 					"targetIndexes" : 
 					[
-						75
+						76
 					]
 				},
 				{
@@ -841,7 +842,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/newlib",
 					"targetIndexes" : 
 					[
-						53
+						54
 					]
 				},
 				{
@@ -931,7 +932,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/unity",
 					"targetIndexes" : 
 					[
-						69
+						70
 					]
 				},
 				{
@@ -973,7 +974,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/nghttp",
 					"targetIndexes" : 
 					[
-						54
+						55
 					]
 				},
 				{
@@ -1029,7 +1030,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/tcp_transport",
 					"targetIndexes" : 
 					[
-						66
+						67
 					]
 				},
 				{
@@ -1109,7 +1110,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/protobuf-c",
 					"targetIndexes" : 
 					[
-						59
+						60
 					]
 				},
 				{
@@ -1123,7 +1124,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/protocomm",
 					"targetIndexes" : 
 					[
-						60
+						61
 					]
 				},
 				{
@@ -1137,7 +1138,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/mdns",
 					"targetIndexes" : 
 					[
-						51
+						52
 					]
 				},
 				{
@@ -1165,7 +1166,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/sdmmc",
 					"targetIndexes" : 
 					[
-						62
+						63
 					]
 				},
 				{
@@ -1221,7 +1222,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/wear_levelling",
 					"targetIndexes" : 
 					[
-						72
+						73
 					]
 				},
 				{
@@ -1273,7 +1274,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/jsmn",
 					"targetIndexes" : 
 					[
-						44
+						45
 					]
 				},
 				{
@@ -1287,7 +1288,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/json",
 					"targetIndexes" : 
 					[
-						45
+						46
 					]
 				},
 				{
@@ -1301,7 +1302,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/libsodium",
 					"targetIndexes" : 
 					[
-						46
+						47
 					]
 				},
 				{
@@ -1315,7 +1316,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/mqtt",
 					"targetIndexes" : 
 					[
-						52
+						53
 					]
 				},
 				{
@@ -1329,7 +1330,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/openssl",
 					"targetIndexes" : 
 					[
-						57
+						58
 					]
 				},
 				{
@@ -1343,7 +1344,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/perfmon",
 					"targetIndexes" : 
 					[
-						58
+						59
 					]
 				},
 				{
@@ -1357,7 +1358,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/spiffs",
 					"targetIndexes" : 
 					[
-						65
+						66
 					]
 				},
 				{
@@ -1371,7 +1372,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/usb",
 					"targetIndexes" : 
 					[
-						70
+						71
 					]
 				},
 				{
@@ -1395,7 +1396,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/ulp",
 					"targetIndexes" : 
 					[
-						68
+						69
 					]
 				},
 				{
@@ -1409,7 +1410,7 @@
 					"source" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/wifi_provisioning",
 					"targetIndexes" : 
 					[
-						73
+						74
 					]
 				},
 				{
@@ -1423,7 +1424,21 @@
 					"source" : "main",
 					"targetIndexes" : 
 					[
-						49
+						50
+					]
+				},
+				{
+					"build" : "esp-idf/gpio",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "components/gpio",
+					"targetIndexes" : 
+					[
+						41
 					]
 				},
 				{
@@ -1437,7 +1452,7 @@
 					"source" : "components/id_open",
 					"targetIndexes" : 
 					[
-						43
+						44
 					]
 				},
 				{
@@ -1451,7 +1466,7 @@
 					"source" : "components/nmea_parser",
 					"targetIndexes" : 
 					[
-						55
+						56
 					]
 				}
 			],
@@ -1471,24 +1486,24 @@
 					"targetIndexes" : 
 					[
 						0,
-						77,
-						79,
-						82,
-						84,
-						86,
+						78,
+						80,
+						83,
+						85,
 						87,
 						88,
-						96,
-						98,
+						89,
+						97,
 						99,
 						100,
-						106,
+						101,
 						107,
-						115,
+						108,
 						116,
 						117,
 						118,
-						119
+						119,
+						120
 					]
 				},
 				{
@@ -1588,7 +1603,8 @@
 						92,
 						93,
 						94,
-						95
+						95,
+						96
 					],
 					"name" : "esp-idf",
 					"parentIndex" : 0,
@@ -1670,26 +1686,27 @@
 						74,
 						75,
 						76,
-						80,
+						77,
 						81,
-						83,
-						85,
-						89,
+						82,
+						84,
+						86,
 						90,
 						91,
 						92,
 						93,
 						94,
 						95,
-						97,
-						105,
-						108,
+						96,
+						98,
+						106,
 						109,
 						110,
 						111,
 						112,
 						113,
-						114
+						114,
+						115
 					]
 				},
 				{
@@ -1704,11 +1721,11 @@
 					"parentIndex" : 1,
 					"targetIndexes" : 
 					[
-						78,
-						101,
+						79,
 						102,
 						103,
-						104
+						104,
+						105
 					]
 				}
 			],
@@ -1717,7 +1734,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ICTB_project.elf::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ICTB_project.elf-DEBUG-0f7e5bd85f028df66c43.json",
+					"jsonFile" : "target-ICTB_project.elf-DEBUG-a6444aaff085f111c45d.json",
 					"name" : "ICTB_project.elf",
 					"projectIndex" : 0
 				},
@@ -1731,7 +1748,7 @@
 				{
 					"directoryIndex" : 15,
 					"id" : "__idf_app_update::@cc3b426666063acc9674",
-					"jsonFile" : "target-__idf_app_update-DEBUG-0da7aa4e5f5b0a53185d.json",
+					"jsonFile" : "target-__idf_app_update-DEBUG-674e878372d0bbd158d9.json",
 					"name" : "__idf_app_update",
 					"projectIndex" : 1
 				},
@@ -1892,7 +1909,7 @@
 				{
 					"directoryIndex" : 73,
 					"id" : "__idf_esp_local_ctrl::@d6aad58d2946e56208ef",
-					"jsonFile" : "target-__idf_esp_local_ctrl-DEBUG-a4294e512ce409a7dee1.json",
+					"jsonFile" : "target-__idf_esp_local_ctrl-DEBUG-b0b1224b63c9216d051b.json",
 					"name" : "__idf_esp_local_ctrl",
 					"projectIndex" : 1
 				},
@@ -2002,6 +2019,13 @@
 					"projectIndex" : 1
 				},
 				{
+					"directoryIndex" : 94,
+					"id" : "__idf_gpio::@2da138fbada5ed6e3d48",
+					"jsonFile" : "target-__idf_gpio-DEBUG-0fe2b512f1989b2a9edb.json",
+					"name" : "__idf_gpio",
+					"projectIndex" : 1
+				},
+				{
 					"directoryIndex" : 27,
 					"id" : "__idf_hal::@41c1a00f56cd1e9ede18",
 					"jsonFile" : "target-__idf_hal-DEBUG-0b98b3de498527466b25.json",
@@ -2016,7 +2040,7 @@
 					"projectIndex" : 1
 				},
 				{
-					"directoryIndex" : 94,
+					"directoryIndex" : 95,
 					"id" : "__idf_id_open::@7ea58b929f6ebc193c8b",
 					"jsonFile" : "target-__idf_id_open-DEBUG-22804352e08f8d0017ef.json",
 					"name" : "__idf_id_open",
@@ -2060,7 +2084,7 @@
 				{
 					"directoryIndex" : 93,
 					"id" : "__idf_main::@7368607ed66887415643",
-					"jsonFile" : "target-__idf_main-DEBUG-be19b541190ed21e49e5.json",
+					"jsonFile" : "target-__idf_main-DEBUG-e7478cebdfe18c0fc0f1.json",
 					"name" : "__idf_main",
 					"projectIndex" : 1
 				},
@@ -2100,7 +2124,7 @@
 					"projectIndex" : 1
 				},
 				{
-					"directoryIndex" : 95,
+					"directoryIndex" : 96,
 					"id" : "__idf_nmea_parser::@a7c1d554007515c3f005",
 					"jsonFile" : "target-__idf_nmea_parser-DEBUG-2b33ad705ee9a11f6f2d.json",
 					"name" : "__idf_nmea_parser",
@@ -2228,7 +2252,7 @@
 				{
 					"directoryIndex" : 92,
 					"id" : "__idf_wifi_provisioning::@9d7e7ffe1b15746c1098",
-					"jsonFile" : "target-__idf_wifi_provisioning-DEBUG-a4d43cca77955bfcce88.json",
+					"jsonFile" : "target-__idf_wifi_provisioning-DEBUG-007bc72e275277c2a194.json",
 					"name" : "__idf_wifi_provisioning",
 					"projectIndex" : 1
 				},
@@ -2249,7 +2273,7 @@
 				{
 					"directoryIndex" : 23,
 					"id" : "__ldgen_output_sections.ld::@874df54e61e20112dfd4",
-					"jsonFile" : "target-__ldgen_output_sections.ld-DEBUG-a6fe56e28fe2a4160576.json",
+					"jsonFile" : "target-__ldgen_output_sections.ld-DEBUG-50f957df044e969063e3.json",
 					"name" : "__ldgen_output_sections.ld",
 					"projectIndex" : 1
 				},

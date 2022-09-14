@@ -631,12 +631,12 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 3,
-			"id" : "__idf_esp_ringbuf::@ad62994b1ce98b81017d"
-		},
-		{
 			"backtrace" : 7,
 			"id" : "_project_elf_src::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_esp_ringbuf::@ad62994b1ce98b81017d"
 		},
 		{
 			"backtrace" : 13,
@@ -644,23 +644,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_unity::@fec746937506b5690992"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_cbor::@54bec30243cbf65f6214"
-		},
-		{
-			"backtrace" : 3,
 			"id" : "__idf_asio::@db1a8833e22596808d70"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_esp_adc_cal::@dc736dc1d836ef36c9a5"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_coap::@9ea4196552bc90428972"
 		},
 		{
 			"backtrace" : 3,
@@ -668,11 +652,35 @@
 		},
 		{
 			"backtrace" : 3,
+			"id" : "__idf_unity::@fec746937506b5690992"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_coap::@9ea4196552bc90428972"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_cbor::@54bec30243cbf65f6214"
+		},
+		{
+			"backtrace" : 3,
 			"id" : "__idf_esp_hid::@15df40e16a5d8775dd9b"
 		},
 		{
 			"backtrace" : 3,
+			"id" : "__idf_esp_adc_cal::@dc736dc1d836ef36c9a5"
+		},
+		{
+			"backtrace" : 3,
 			"id" : "__idf_esp_lcd::@d5a84597e1633c9ab0d3"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_esp_local_ctrl::@d6aad58d2946e56208ef"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
 		},
 		{
 			"backtrace" : 3,
@@ -688,15 +696,15 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_esp_local_ctrl::@d6aad58d2946e56208ef"
+			"id" : "__idf_expat::@af4f74c6fac3f93a3341"
 		},
 		{
 			"backtrace" : 3,
 			"id" : "__idf_wear_levelling::@cb21b0d7c0815cff11c6"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_jsmn::@88dec008f06e3af609d0"
 		},
 		{
 			"backtrace" : 3,
@@ -708,7 +716,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_expat::@af4f74c6fac3f93a3341"
+			"id" : "__idf_perfmon::@aac0f647c32bb8f54a67"
 		},
 		{
 			"backtrace" : 3,
@@ -716,23 +724,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_jsmn::@88dec008f06e3af609d0"
-		},
-		{
-			"backtrace" : 3,
 			"id" : "__idf_json::@c78a8bdc820334f01148"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_mqtt::@c1ab2c6a99226d1f4b56"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_perfmon::@aac0f647c32bb8f54a67"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_spiffs::@df881b71474064c86689"
 		},
 		{
 			"backtrace" : 3,
@@ -740,7 +732,15 @@
 		},
 		{
 			"backtrace" : 3,
+			"id" : "__idf_mqtt::@c1ab2c6a99226d1f4b56"
+		},
+		{
+			"backtrace" : 3,
 			"id" : "__idf_usb::@4a2418067d0bb57af462"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_spiffs::@df881b71474064c86689"
 		},
 		{
 			"backtrace" : 3,
@@ -748,19 +748,19 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_main::@7368607ed66887415643"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_gpio::@2da138fbada5ed6e3d48"
-		},
-		{
-			"backtrace" : 3,
 			"id" : "__idf_id_open::@7ea58b929f6ebc193c8b"
 		},
 		{
 			"backtrace" : 3,
+			"id" : "__idf_main::@7368607ed66887415643"
+		},
+		{
+			"backtrace" : 3,
 			"id" : "__idf_nmea_parser::@a7c1d554007515c3f005"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_gpio::@2da138fbada5ed6e3d48"
 		}
 	],
 	"id" : "ICTB_project.elf::@6890427a1f51a3e7e1df",

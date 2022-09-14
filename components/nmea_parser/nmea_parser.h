@@ -145,8 +145,8 @@ extern "C" {
 	typedef struct {
 		struct {
 			uart_port_t uart_port;        /*!< UART port number */
-			uint32_t rx_pin;              /*!< UART Rx Pin number */
 			uint32_t tx_pin;			  /*!< UART Tx Pin number */
+			uint32_t rx_pin;              /*!< UART Rx Pin number */
 			uint32_t baud_rate;           /*!< UART baud rate */
 			uart_word_length_t data_bits; /*!< UART data bits length */
 			uart_parity_t parity;         /*!< UART parity */
@@ -169,8 +169,8 @@ extern "C" {
 	     {                                      \
 	         .uart = {                          \
 	             .uart_port = UART_NUM_1,       \
-	             .rx_pin = 2,                   \
 			     .tx_pin = 3,                   \
+	             .rx_pin = 2,                   \
 	             .baud_rate = 9600,             \
 	             .data_bits = UART_DATA_8_BITS, \
 	             .parity = UART_PARITY_DISABLE, \
@@ -231,6 +231,7 @@ extern "C" {
 	 */
 	esp_err_t nmea_parser_remove_handler(nmea_parser_handle_t nmea_hdl, esp_event_handler_t event_handler);
 
+	esp_err_t nmea_parser_sendData(const char* data);
 #ifdef __cplusplus
 }
 #endif

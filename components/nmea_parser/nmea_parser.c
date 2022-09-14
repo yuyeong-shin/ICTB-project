@@ -815,3 +815,11 @@ esp_err_t nmea_parser_remove_handler(nmea_parser_handle_t nmea_hdl, esp_event_ha
 	esp_gps_t *esp_gps = (esp_gps_t *)nmea_hdl;
 	return esp_event_handler_unregister_with(esp_gps->event_loop_hdl, ESP_NMEA_EVENT, ESP_EVENT_ANY_ID, event_handler);
 }
+
+esp_err_t nmea_parser_sendData(const char* data)
+{
+	const int len = strlen(data);
+	const int txBytes = uart_write_bytes(UART_NUM_1, data, len);
+	
+	return txBytes;
+}

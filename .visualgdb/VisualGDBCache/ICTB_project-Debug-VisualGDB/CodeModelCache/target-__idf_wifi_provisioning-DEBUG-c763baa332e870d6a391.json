@@ -54,18 +54,6 @@
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 342,
-				"parent" : 3
-			},
-			{
-				"command" : 2,
-				"file" : 0,
-				"line" : 327,
-				"parent" : 4
-			},
-			{
-				"command" : 3,
-				"file" : 0,
 				"line" : 345,
 				"parent" : 3
 			},
@@ -73,13 +61,25 @@
 				"command" : 2,
 				"file" : 0,
 				"line" : 324,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 342,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 327,
 				"parent" : 6
 			},
 			{
 				"command" : 2,
 				"file" : 0,
 				"line" : 324,
-				"parent" : 6
+				"parent" : 4
 			},
 			{
 				"command" : 5,
@@ -151,7 +151,7 @@
 				"command" : 2,
 				"file" : 0,
 				"line" : 324,
-				"parent" : 6
+				"parent" : 4
 			}
 		]
 	},
@@ -263,7 +263,7 @@
 			"defines" : 
 			[
 				{
-					"backtrace" : 5,
+					"backtrace" : 7,
 					"define" : "MBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\""
 				}
 			],
@@ -486,35 +486,35 @@
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/esp_timer/include"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 7,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/protocomm/include/common"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 7,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/protocomm/include/security"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 7,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/protocomm/include/transports"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 7,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/nvs_flash/include"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 7,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/spi_flash/include"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 7,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/mbedtls/port/include"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 7,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/mbedtls/mbedtls/include"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 7,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/mbedtls/esp_crt_bundle/include"
 				},
 				{
@@ -522,11 +522,11 @@
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/protobuf-c/protobuf-c"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 5,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/mdns/include"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 5,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/console"
 				},
 				{
@@ -557,15 +557,15 @@
 		},
 		{
 			"backtrace" : 5,
-			"id" : "__idf_protocomm::@d76d01c8dec06205e1fc"
-		},
-		{
-			"backtrace" : 5,
-			"id" : "__idf_protobuf-c::@b14513c4bd859268ec22"
+			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
 		},
 		{
 			"backtrace" : 7,
-			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
+			"id" : "__idf_protocomm::@d76d01c8dec06205e1fc"
+		},
+		{
+			"backtrace" : 7,
+			"id" : "__idf_protobuf-c::@b14513c4bd859268ec22"
 		},
 		{
 			"backtrace" : 8,

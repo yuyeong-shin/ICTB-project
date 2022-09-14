@@ -73,6 +73,7 @@ static void task_opendroneid_wifi(void *arg)
 			//ID_OpenDrone_transmit_wifi(&utm_data);
 			xSemaphoreGiveRecursive(mut_);
 			//ID_OpenDrone_transmit_wifi(&utm_data);
+			
 		}
 		else
 		{
@@ -92,6 +93,7 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 {
 	gps_t *gps = NULL;
 //	printf("GPS Inttt\r\n");
+	
 	switch (event_id) {
 	case GPS_UPDATE:
 		gps = (gps_t *)event_data;
@@ -213,6 +215,7 @@ void app_main(void)
 	
 	while (1)
 	{
+		
 //		tick = xTaskGetTickCount();
 		
 		//ID_OpenDrone_transmit(&utm_data);

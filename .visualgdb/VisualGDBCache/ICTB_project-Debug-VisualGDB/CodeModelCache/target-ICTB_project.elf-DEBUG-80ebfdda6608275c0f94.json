@@ -614,6 +614,10 @@
 				},
 				{
 					"backtrace" : 3,
+					"path" : "C:/Users/yuyeong/source/repos/ICTB_project/ICTB_project/components/i2c_barometer"
+				},
+				{
+					"backtrace" : 3,
 					"path" : "C:/Users/yuyeong/source/repos/ICTB_project/ICTB_project/components/id_open"
 				},
 				{
@@ -648,19 +652,19 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_cmock::@38f9eb59693b7394f54c"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_unity::@fec746937506b5690992"
-		},
-		{
-			"backtrace" : 3,
 			"id" : "__idf_coap::@9ea4196552bc90428972"
 		},
 		{
 			"backtrace" : 3,
+			"id" : "__idf_cmock::@38f9eb59693b7394f54c"
+		},
+		{
+			"backtrace" : 3,
 			"id" : "__idf_cbor::@54bec30243cbf65f6214"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_unity::@fec746937506b5690992"
 		},
 		{
 			"backtrace" : 3,
@@ -676,11 +680,11 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_esp_local_ctrl::@d6aad58d2946e56208ef"
+			"id" : "__idf_protobuf-c::@b14513c4bd859268ec22"
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
+			"id" : "__idf_esp_local_ctrl::@d6aad58d2946e56208ef"
 		},
 		{
 			"backtrace" : 3,
@@ -688,7 +692,11 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_protobuf-c::@b14513c4bd859268ec22"
+			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_wear_levelling::@cb21b0d7c0815cff11c6"
 		},
 		{
 			"backtrace" : 3,
@@ -700,15 +708,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_wear_levelling::@cb21b0d7c0815cff11c6"
-		},
-		{
-			"backtrace" : 3,
 			"id" : "__idf_jsmn::@88dec008f06e3af609d0"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_fatfs::@75ac1d9b25dacc8cc9e7"
 		},
 		{
 			"backtrace" : 3,
@@ -716,7 +716,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_perfmon::@aac0f647c32bb8f54a67"
+			"id" : "__idf_fatfs::@75ac1d9b25dacc8cc9e7"
 		},
 		{
 			"backtrace" : 3,
@@ -724,7 +724,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_json::@c78a8bdc820334f01148"
+			"id" : "__idf_perfmon::@aac0f647c32bb8f54a67"
 		},
 		{
 			"backtrace" : 3,
@@ -736,7 +736,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_usb::@4a2418067d0bb57af462"
+			"id" : "__idf_json::@c78a8bdc820334f01148"
 		},
 		{
 			"backtrace" : 3,
@@ -744,7 +744,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_wifi_provisioning::@9d7e7ffe1b15746c1098"
+			"id" : "__idf_usb::@4a2418067d0bb57af462"
 		},
 		{
 			"backtrace" : 3,
@@ -752,15 +752,23 @@
 		},
 		{
 			"backtrace" : 3,
+			"id" : "__idf_gpio::@2da138fbada5ed6e3d48"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_wifi_provisioning::@9d7e7ffe1b15746c1098"
+		},
+		{
+			"backtrace" : 3,
 			"id" : "__idf_main::@7368607ed66887415643"
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_nmea_parser::@a7c1d554007515c3f005"
+			"id" : "__idf_i2c_barometer::@dc636f7d01f5cbbb69c9"
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_gpio::@2da138fbada5ed6e3d48"
+			"id" : "__idf_nmea_parser::@a7c1d554007515c3f005"
 		}
 	],
 	"id" : "ICTB_project.elf::@6890427a1f51a3e7e1df",
@@ -1144,6 +1152,11 @@
 			{
 				"backtrace" : 3,
 				"fragment" : "esp-idf\\gpio\\libgpio.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "esp-idf\\i2c_barometer\\libi2c_barometer.a",
 				"role" : "libraries"
 			},
 			{
@@ -3630,6 +3643,10 @@
 			{
 				"backtrace" : 3,
 				"fragment" : "__idf_gpio"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "__idf_i2c_barometer"
 			},
 			{
 				"backtrace" : 3,

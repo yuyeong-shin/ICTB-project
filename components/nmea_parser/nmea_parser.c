@@ -711,7 +711,8 @@ nmea_parser_handle_t nmea_parser_init(const nmea_parser_config_t *config)
 		goto err_uart_config;
 	}
 	if (uart_set_pin(esp_gps->uart_port,
-		UART_PIN_NO_CHANGE,
+		//UART_PIN_NO_CHANGE,
+		config->uart.tx_pin,		// add tx pin number 3
 		config->uart.rx_pin,
 		UART_PIN_NO_CHANGE,
 		UART_PIN_NO_CHANGE) != ESP_OK) {

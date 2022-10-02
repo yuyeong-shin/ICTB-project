@@ -1015,6 +1015,9 @@
 			"path" : "main/CMakeLists.txt"
 		},
 		{
+			"path" : "components/global_variables/CMakeLists.txt"
+		},
+		{
 			"path" : "components/gpio/CMakeLists.txt"
 		},
 		{

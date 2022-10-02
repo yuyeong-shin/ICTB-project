@@ -610,6 +610,10 @@
 				},
 				{
 					"backtrace" : 3,
+					"path" : "C:/Users/yuyeong/source/repos/ICTB_project/ICTB_project/components/global_variables"
+				},
+				{
+					"backtrace" : 3,
 					"path" : "C:/Users/yuyeong/source/repos/ICTB_project/ICTB_project/components/gpio"
 				},
 				{
@@ -635,12 +639,12 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 7,
-			"id" : "_project_elf_src::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 3,
 			"id" : "__idf_esp_ringbuf::@ad62994b1ce98b81017d"
+		},
+		{
+			"backtrace" : 7,
+			"id" : "_project_elf_src::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 13,
@@ -648,15 +652,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_asio::@db1a8833e22596808d70"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_coap::@9ea4196552bc90428972"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_cmock::@38f9eb59693b7394f54c"
+			"id" : "__idf_unity::@fec746937506b5690992"
 		},
 		{
 			"backtrace" : 3,
@@ -664,11 +660,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_unity::@fec746937506b5690992"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_esp_hid::@15df40e16a5d8775dd9b"
+			"id" : "__idf_asio::@db1a8833e22596808d70"
 		},
 		{
 			"backtrace" : 3,
@@ -676,15 +668,19 @@
 		},
 		{
 			"backtrace" : 3,
+			"id" : "__idf_cmock::@38f9eb59693b7394f54c"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_coap::@9ea4196552bc90428972"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_esp_hid::@15df40e16a5d8775dd9b"
+		},
+		{
+			"backtrace" : 3,
 			"id" : "__idf_esp_lcd::@d5a84597e1633c9ab0d3"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_protobuf-c::@b14513c4bd859268ec22"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_esp_local_ctrl::@d6aad58d2946e56208ef"
 		},
 		{
 			"backtrace" : 3,
@@ -692,19 +688,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_wear_levelling::@cb21b0d7c0815cff11c6"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_esp_websocket_client::@2aa04d350e0c9afab7cd"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_expat::@af4f74c6fac3f93a3341"
+			"id" : "__idf_protobuf-c::@b14513c4bd859268ec22"
 		},
 		{
 			"backtrace" : 3,
@@ -712,23 +696,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_freemodbus::@de63ca74a1babc26b29c"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_fatfs::@75ac1d9b25dacc8cc9e7"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_libsodium::@66e4f5d448f23c9449a2"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_perfmon::@aac0f647c32bb8f54a67"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_openssl::@e614527ea5fe5ca5f395"
+			"id" : "__idf_json::@c78a8bdc820334f01148"
 		},
 		{
 			"backtrace" : 3,
@@ -736,7 +704,39 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_json::@c78a8bdc820334f01148"
+			"id" : "__idf_libsodium::@66e4f5d448f23c9449a2"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_esp_websocket_client::@2aa04d350e0c9afab7cd"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_esp_local_ctrl::@d6aad58d2946e56208ef"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_wear_levelling::@cb21b0d7c0815cff11c6"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_freemodbus::@de63ca74a1babc26b29c"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_expat::@af4f74c6fac3f93a3341"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_fatfs::@75ac1d9b25dacc8cc9e7"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_perfmon::@aac0f647c32bb8f54a67"
 		},
 		{
 			"backtrace" : 3,
@@ -748,15 +748,7 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_id_open::@7ea58b929f6ebc193c8b"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_gpio::@2da138fbada5ed6e3d48"
-		},
-		{
-			"backtrace" : 3,
-			"id" : "__idf_wifi_provisioning::@9d7e7ffe1b15746c1098"
+			"id" : "__idf_openssl::@e614527ea5fe5ca5f395"
 		},
 		{
 			"backtrace" : 3,
@@ -764,11 +756,23 @@
 		},
 		{
 			"backtrace" : 3,
-			"id" : "__idf_i2c_barometer::@dc636f7d01f5cbbb69c9"
+			"id" : "__idf_wifi_provisioning::@9d7e7ffe1b15746c1098"
 		},
 		{
 			"backtrace" : 3,
 			"id" : "__idf_nmea_parser::@a7c1d554007515c3f005"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_i2c_barometer::@dc636f7d01f5cbbb69c9"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_id_open::@7ea58b929f6ebc193c8b"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "__idf_gpio::@2da138fbada5ed6e3d48"
 		}
 	],
 	"id" : "ICTB_project.elf::@6890427a1f51a3e7e1df",
@@ -3639,6 +3643,10 @@
 			{
 				"backtrace" : 3,
 				"fragment" : "__idf_main"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "__idf_global_variables"
 			},
 			{
 				"backtrace" : 3,

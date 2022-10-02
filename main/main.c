@@ -41,6 +41,7 @@ static const char *TAG_gps = "gps_";
 
 static void timer_callback(void *arg)
 {
+	g_timer_cnt++;
 	xSemaphoreGive(sem_);
 }
 
@@ -98,7 +99,7 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 	case GPS_UPDATE:
 		gps = (gps_t *)event_data;
 		/* print information parsed from GPS statements */
-		ESP_LOGI(TAG_gps,
+/*		ESP_LOGI(TAG_gps,
 			"%d/%d/%d %d:%d:%d => \r\n"
 		         "\t\t\t\t\t\tlatitude   = %.05f°N\r\n"
 		         "\t\t\t\t\t\tlongitude = %.05f°E\r\n"
@@ -113,7 +114,7 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 			gps->latitude,
 			gps->longitude,
 			gps->altitude,
-			gps->speed);
+			gps->speed);*/
 		utm_data.years = (int)gps->date.year + YEAR_BASE;
 		utm_data.months = (int)gps->date.month;
 		utm_data.days = (int)gps->date.day;
@@ -181,12 +182,12 @@ void app_main(void)
 	
 	// for Switch Input (GPIO interrupt)
 	katech_esp_gpio_init();
-	
+
 	// Timer Start
 	timer_init();
 	
     /* Print chip information */
-    esp_chip_info_t chip_info;
+/*    esp_chip_info_t chip_info;
     esp_chip_info(&chip_info);
     printf("This is %s chip with %d CPU core(s), WiFi%s%s, ",
             CONFIG_IDF_TARGET,
@@ -200,7 +201,7 @@ void app_main(void)
             (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "embedded" : "external");
 
     printf("Minimum free heap size: %d bytes\n", esp_get_minimum_free_heap_size());
-
+*/
     vTaskDelay(1000 / portTICK_PERIOD_MS);
 	
 	//xTaskCreatePinnedToCore(task_opendroneid_wifi, "wifi", 1024, NULL, PRIO_TASK_WIFI, NULL, 0);

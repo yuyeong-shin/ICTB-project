@@ -2,15 +2,61 @@
 #include "katech_esp_gpio.h"
 #include "esp_log.h"
 
+
+//static xQueueHandle gpio_evt_queue = NULL;
+static SemaphoreHandle_t gpio_isr_sem;
+
 static void IRAM_ATTR gpio_isr_handler(void* arg)
 {
 	uint32_t gpio_num = (uint32_t) arg;
 	
-	printf("gpio num %d \r\n", gpio_num);
+	xSemaphoreGive(gpio_isr_sem);
+//	xQueueSendFromISR(gpio_evt_queue, &gpio_num, NULL); 
+	//printf("gpio num %d \r\n", gpio_num);
 }
+
+static void task_switch_mode_change(void* arg)
+{
+	//uint32_t io_num;
+	static uint32_t isr_num = 0;
+	static uint32_t isr_num_mem = 0;
+	static uint32_t timer_mem = 0;
+	static uint8_t flag = 0;
+	
+	for (;;) {
+//		if (xQueueReceive(gpio_evt_queue, &io_num, portMAX_DELAY)) {
+		if (xSemaphoreTake(gpio_isr_sem, (TickType_t) portMAX_DELAY) == pdTRUE) {
+			//printf("GPIO[%d] intr, val: %d\n", io_num, gpio_get_level(io_num));
+			printf("GPIO ISR num %d timer_cnt %d\r\n", isr_num++, g_timer_cnt);
+			printf("timer_mem %d isr_num_mem %d\r\n", timer_mem, isr_num_mem);
+			
+			if (flag == 0)
+			{
+				timer_mem = g_timer_cnt;
+				isr_num_mem = isr_num;
+				flag = 1;
+			}
+			
+			if (flag == 1)
+			{
+				if ((g_timer_cnt - timer_mem < 10) && (isr_num - isr_num_mem > 4))
+				{
+					isr_num = 0;
+					flag = 0;
+					timer_mem = 0;
+					isr_num_mem = 0;
+					printf("mode change \r\n");
+				}
+			}
+			
+		}
+	}
+}
+
 
 void katech_esp_gpio_init(void)
 {
+	
 	//zero-initialize the config structure.
 	gpio_config_t io_conf = { };
 	//interrupt of rising edge
@@ -22,14 +68,64 @@ void katech_esp_gpio_init(void)
 	//enable pull-up mode
 	io_conf.pull_up_en = 1;
 	
-	gpio_config(&io_conf);
+	ESP_ERROR_CHECK(gpio_config(&io_conf));
 	
-	//change gpio intrrupt type for one pin rising edge
-	gpio_set_intr_type(GPIO_INPUT_IO_0, GPIO_INTR_POSEDGE);
+	//create a queue to handle gpio event from isr
+//	gpio_evt_queue = xQueueCreate(5, sizeof(uint32_t));
+	gpio_isr_sem = xSemaphoreCreateBinary();
+	//start gpio task
+	xTaskCreate(task_switch_mode_change, "switch_mode_change", 2048, NULL, 10, NULL);
 	
 	//install gpio isr service
-	gpio_install_isr_service(ESP_INTR_FLAG_DEFAULT);
-	//hook isr handler for specific gpio pin
-	gpio_isr_handler_add(GPIO_INPUT_IO_0, gpio_isr_handler, (void*) GPIO_INPUT_IO_0);
+	ESP_ERROR_CHECK(gpio_install_isr_service(ESP_INTR_FLAG_DEFAULT));
 	
+	ESP_ERROR_CHECK(gpio_isr_handler_add(GPIO_INPUT_IO_1, gpio_isr_handler, (void*) GPIO_INPUT_IO_1));
+	
+
+}
+
+void led_strip_hsv2rgb(uint32_t h, uint32_t s, uint32_t v, uint32_t *r, uint32_t *g, uint32_t *b)
+{
+	h %= 360; // h -> [0,360]
+	uint32_t rgb_max = v * 2.55f;
+	uint32_t rgb_min = rgb_max * (100 - s) / 100.0f;
+
+	uint32_t i = h / 60;
+	uint32_t diff = h % 60;
+
+	// RGB adjustment amount by hue
+	uint32_t rgb_adj = (rgb_max - rgb_min) * diff / 60;
+
+	switch (i) {
+	case 0:
+		*r = rgb_max;
+		*g = rgb_min + rgb_adj;
+		*b = rgb_min;
+		break;
+	case 1:
+		*r = rgb_max - rgb_adj;
+		*g = rgb_max;
+		*b = rgb_min;
+		break;
+	case 2:
+		*r = rgb_min;
+		*g = rgb_max;
+		*b = rgb_min + rgb_adj;
+		break;
+	case 3:
+		*r = rgb_min;
+		*g = rgb_max - rgb_adj;
+		*b = rgb_max;
+		break;
+	case 4:
+		*r = rgb_min + rgb_adj;
+		*g = rgb_min;
+		*b = rgb_max;
+		break;
+	default:
+		*r = rgb_max;
+		*g = rgb_min;
+		*b = rgb_max - rgb_adj;
+		break;
+	}
 }

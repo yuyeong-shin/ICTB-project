@@ -456,6 +456,8 @@ out:
 static esp_err_t gps_decode(esp_gps_t *esp_gps, size_t len)
 {
 	const uint8_t *d = esp_gps->buffer;
+	printf("%s", esp_gps->buffer);
+	
 	while (*d) {
 		/* Start of a statement */
 		if (*d == '$') {

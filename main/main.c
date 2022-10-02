@@ -30,7 +30,7 @@
 #define TIME_ZONE			(+9)		// Korea
 #define YEAR_BASE			(2000)		// data in GPS starts from 2000
 
-#define ESP_TIMER_PERIOD	100			// ms
+#define ESP_TIMER_PERIOD	1000			// ms
 static SemaphoreHandle_t sem_;
 static SemaphoreHandle_t mut_;
 	
@@ -99,7 +99,7 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 	case GPS_UPDATE:
 		gps = (gps_t *)event_data;
 		/* print information parsed from GPS statements */
-/*		ESP_LOGI(TAG_gps,
+		ESP_LOGI(TAG_gps,
 			"%d/%d/%d %d:%d:%d => \r\n"
 		         "\t\t\t\t\t\tlatitude   = %.05f°N\r\n"
 		         "\t\t\t\t\t\tlongitude = %.05f°E\r\n"
@@ -114,7 +114,7 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 			gps->latitude,
 			gps->longitude,
 			gps->altitude,
-			gps->speed);*/
+			gps->speed);
 		utm_data.years = (int)gps->date.year + YEAR_BASE;
 		utm_data.months = (int)gps->date.month;
 		utm_data.days = (int)gps->date.day;

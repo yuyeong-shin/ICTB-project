@@ -630,6 +630,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 	if (wifi_tx_flag_1)
 	{
 		UAS_data.SystemValid = 1;
+		UAS_data.LocationValid = 1;
 		if (UAS_data.BasicID[0].UASID[0])
 		{
 			UAS_data.BasicIDValid[0] = 1;

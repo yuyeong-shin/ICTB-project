@@ -230,7 +230,7 @@ int odid_message_build_pack(ODID_UAS_Data *UAS_Data, void *pack, size_t buflen)
 	if (UAS_Data->LocationValid) {
 		if (msg_pack.MsgPackSize >= ODID_PACK_MAX_MESSAGES)
 			return -EINVAL;
-		encodeLocationMessage((void *)&msg_pack.Messages[msg_pack.MsgPackSize], &UAS_Data->Location);
+		encodeLocationMessage((void *)&msg_pack.Messages[msg_pack.MsgPackSize], &UAS_Data->Location);		
 		msg_pack.MsgPackSize++;
 	}
 	for (int i = 0; i < ODID_AUTH_MAX_PAGES; i++)
@@ -324,7 +324,7 @@ int odid_wifi_build_nan_sync_beacon_frame(char *mac, uint8_t *buf, size_t buf_si
 	memset(master_indication_attr, 0, sizeof(*master_indication_attr));
 	master_indication_attr->header.attribute_id = 0x00;
 	master_indication_attr->header.length = cpu_to_le16(0x0002);
-	/* Information that is used to indicate a NAN Device¡¯s preference to serve
+	/* Information that is used to indicate a NAN Deviceâ€™s preference to serve
 	 * as the role of Master, with a larger value indicating a higher
 	 * preference. Values 1 and 255 are used for testing purposes only.
 	 */

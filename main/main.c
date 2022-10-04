@@ -99,7 +99,7 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 	case GPS_UPDATE:
 		gps = (gps_t *)event_data;
 		/* print information parsed from GPS statements */
-		ESP_LOGI(TAG_gps,
+/*		ESP_LOGI(TAG_gps,
 			"%d/%d/%d %d:%d:%d => \r\n"
 		         "\t\t\t\t\t\tlatitude   = %.05f°N\r\n"
 		         "\t\t\t\t\t\tlongitude = %.05f°E\r\n"
@@ -114,22 +114,38 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 			gps->latitude,
 			gps->longitude,
 			gps->altitude,
-			gps->speed);
-		utm_data.years = (int)gps->date.year + YEAR_BASE;
-		utm_data.months = (int)gps->date.month;
-		utm_data.days = (int)gps->date.day;
-		utm_data.hours = (int)gps->tim.hour + TIME_ZONE;
-		utm_data.minutes = (int)gps->tim.minute;
-		utm_data.seconds = (int)gps->tim.second;
-		utm_data.csecs = (int)gps->tim.thousand;
+			gps->speed);*/
+//		utm_data.years = (int)gps->date.year + YEAR_BASE;
+//		utm_data.months = (int)gps->date.month;
+//		utm_data.days = (int)gps->date.day;
+//		utm_data.hours = (int)gps->tim.hour + TIME_ZONE;
+//		utm_data.minutes = (int)gps->tim.minute;
+//		utm_data.seconds = (int)gps->tim.second;
+//		utm_data.csecs = (int)gps->tim.thousand;
+//		
+//		utm_data.satellites = (int)gps->sats_in_use;
+//		
+//		utm_data.latitude_d = (double)gps->latitude;
+//		utm_data.longitude_d = (double)gps->longitude;
+//		utm_data.alt_agl_m = gps->altitude;
+//		utm_data.heading = (int)gps->cog;
+//		utm_data.speed_kn = (int)gps->speed;
 		
-		utm_data.satellites = (int)gps->sats_in_use;
+		utm_data.years = 2022;
+		utm_data.months = 10;
+		utm_data.days = 6;
+		utm_data.hours = 7 + TIME_ZONE;
+		utm_data.minutes = 32;
+		utm_data.seconds = 12;
+		utm_data.csecs = 123;
 		
-		utm_data.latitude_d = (double)gps->latitude;
-		utm_data.longitude_d = (double)gps->longitude;
-		utm_data.alt_agl_m = gps->altitude;
-		utm_data.heading = (int)gps->cog;
-		utm_data.speed_kn = (int)gps->speed;
+		utm_data.satellites = 1;
+		
+		utm_data.latitude_d = 37.5417874;
+		utm_data.longitude_d = 126.9416684;
+		utm_data.alt_agl_m = 23;
+		utm_data.heading = 144;
+		utm_data.speed_kn = 33;
 			
 		break;
 	case GPS_UNKNOWN:

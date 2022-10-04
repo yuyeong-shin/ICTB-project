@@ -640,7 +640,8 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		{
 			UAS_data.OperatorIDValid = 1;
 		}
-		
+		printf("%lf\r\n", utm_data->base_longitude);
+		printf("%lf\r\n", utm_data->latitude_d);
 		status = ID_OpenDrone_transmit_wifi(utm_data);
 	}
 	else if (wifi_tx_flag_2)
@@ -679,6 +680,7 @@ int ID_OpenDrone_transmit_wifi(struct UTM_data *utm_data)
 	
 	if ((length = odid_wifi_build_message_pack_nan_action_frame(&UAS_data, (char *)WiFi_mac_addr, ++send_counter, buffer, sizeof(buffer))) > 0)
 	{
+		printf("%lf\r\n", UAS_data.Location.Latitude);
 		wifi_status = esp_wifi_80211_tx(WIFI_IF_AP, buffer, length, true);
 	}
 	

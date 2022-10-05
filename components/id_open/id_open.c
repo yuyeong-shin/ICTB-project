@@ -640,11 +640,10 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		{
 			UAS_data.OperatorIDValid = 1;
 		}
-		printf("%lf\r\n", utm_data->base_longitude);
-		printf("%lf\r\n", utm_data->latitude_d);
+		
 		status = ID_OpenDrone_transmit_wifi(utm_data);
 	}
-	else if (wifi_tx_flag_2)
+	
 	{
 		for (i = 0; (i < auth_page_count)&&(i < ODID_AUTH_MAX_PAGES); ++i)
 		{
@@ -737,4 +736,28 @@ int ID_OpenDrone_transmit_ble(uint8_t *odid_msg, int length)
 {
 	
 	return 0;
+}
+
+void ID_OpenDrone_utm_message_pack(struct UTM_data *indata)
+{
+	// BasicID
+	basicID_data->UAType = 2;
+	basicID_data->IDType = 3;
+	strcpy(basicID_data->UASID, "3406820");
+	
+
+	
+	// Location
+	location_data->Direction       = (float) indata->heading;
+	location_data->SpeedHorizontal = 0.514444 * (float) indata->speed_kn;
+	location_data->SpeedVertical   = INV_SPEED_V;
+	location_data->Latitude        = indata->latitude_d;
+	location_data->Longitude       = indata->longitude_d;
+	location_data->Height          = indata->alt_agl_m;
+	location_data->AltitudeGeo     = indata->alt_msl_m;
+    
+	location_data->TimeStamp       = (float)((indata->minutes * 60) + indata->seconds) +
+	                                 0.01 * (float) indata->csecs;
+		
+	
 }

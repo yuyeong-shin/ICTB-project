@@ -44,4 +44,6 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data);
 int ID_OpenDrone_transmit_wifi(struct UTM_data *utm_data);
 int ID_OpenDrone_transmit_ble(uint8_t *odid_msg, int length);
 
+void ID_OpenDrone_utm_message_pack(struct UTM_data *indata);
+
 #endif

@@ -734,7 +734,16 @@ int ID_OpenDrone_transmit_wifi(struct UTM_data *utm_data)
 
 int ID_OpenDrone_transmit_ble(uint8_t *odid_msg, int length)
 {
+#if ID_OD_BT
 	
+	int			i, j, k, len;
+	uint8_t		*a;
+	esp_err_t	status;
+	
+	i = j = k = len = 0;
+	a = ble_me
+	
+#endif //BT
 	return 0;
 }
 
@@ -758,6 +767,26 @@ void ID_OpenDrone_utm_message_pack(struct UTM_data *indata)
     
 	location_data->TimeStamp       = (float)((indata->minutes * 60) + indata->seconds) +
 	                                 0.01 * (float) indata->csecs;
-		
 	
+	// SelfID
+	selfID_data->DescType = 0;
+	//selfID_data->Desc = NULL;
+	
+	// System
+	system_data->OperatorLocationType = ODID_OPERATOR_LOCATION_TYPE_FIXED; // 0=TakeOff, 1=Live GNSS, 2=Fixed Location
+	system_data->ClassificationType = ODID_CLASSIFICATION_TYPE_EU;
+	system_data->OperatorLatitude = 36.740751;
+	system_data->OperatorLongitude = 127.119139;
+	system_data->AreaCount = 1;
+	system_data->AreaRadius = 0;
+	system_data->AreaCeiling = 0;
+	system_data->AreaFloor = 0;
+	system_data->CategoryEU = ODID_CATEGORY_EU_UNDECLARED;
+	system_data->ClassEU = ODID_CLASS_EU_UNDECLARED;
+	system_data->Timestamp = 0;
+	
+	//operatorID_data;
+	operatorID_data->OperatorIdType = ODID_OPERATOR_ID;
+	strcpy(operatorID_data->OperatorId, "OPERATORID");
+
 }

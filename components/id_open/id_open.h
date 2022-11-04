@@ -9,8 +9,8 @@
 
 #define ID_OD_WIFI_NAN    1
 #define ID_OD_WIFI_BEACON 1
-#define ID_OD_BT          1        // ASTM F3411-19 / ASD-STAN 4709-002.
-#define BLE_SERVICES      1        // Experimental.
+#define ID_OD_BT          0        // ASTM F3411-19 / ASD-STAN 4709-002.
+#define BLE_SERVICES      0        // Experimental.
 
 #if ID_OD_WIFI_NAN || ID_OD_WIFI_BEACON
 #define ID_OD_WIFI        1
@@ -27,8 +27,9 @@
 
 
 #if ID_OD_BT
-#include "BLEDevice.h"
-#include "BLEUtils.h"
+//#include "BLEDevice.h"
+//#include "BLEUtils.h"
+
 #endif
 
 #include "utm.h"

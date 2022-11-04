@@ -741,7 +741,36 @@ int ID_OpenDrone_transmit_ble(uint8_t *odid_msg, int length)
 	esp_err_t	status;
 	
 	i = j = k = len = 0;
-	a = ble_me
+	a = ble_message;
+	
+	memset(ble_message, 0, sizeof(ble_message));
+	
+	if (advertising)
+	{
+		status = esp_ble_gap_stop_advertising();
+	}
+	
+	ble_message[j++] = 0x1e;
+	ble_message[j++] = 0x16;
+	ble_message[j++] = 0xfa; // ASTM
+	ble_message[j++] = 0xff; //
+	ble_message[j++] = 0x0d;
+	
+#if 0
+	ble_message[j++] = ++counter;
+#else
+	ble_message[j++] = ++msg_counter[odid_msg[0] >> 4];
+#endif
+	
+	for (i = 0; (i < length)&&(j < sizeof(ble_message)); ++i, ++j) 
+	{
+		ble_message[j] = odid_msg[i];
+	}
+
+	status = esp_ble_gap_config_adv_data_raw(ble_message, len = j); 
+	status = esp_ble_gap_start_advertising(&advParams);
+
+	advertising = 1;
 	
 #endif //BT
 	return 0;

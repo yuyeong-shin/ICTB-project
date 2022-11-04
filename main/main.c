@@ -180,7 +180,7 @@ void app_main(void)
 	vTaskDelay(pdMS_TO_TICKS(100));
 	
 	memset(&utm_parameters, 0, sizeof(utm_parameters));
-	strcpy(utm_parameters.UAS_operator, "FIN-OP-1234567");
+	strcpy(utm_parameters.UAS_operator, "KATECH_ODID_No:01");
 	
 	utm_parameters.region			= 2;
 	utm_parameters.EU_category		= 2;

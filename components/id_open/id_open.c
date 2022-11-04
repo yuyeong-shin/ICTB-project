@@ -515,7 +515,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 	{
 		UAS_data.AuthValid[i] = 0;
 	}
-	
+	/*
 	if ((msecs - last_msecs) > 74)
 	{
 		last_msecs = (last_msecs) ? last_msecs + 75 : msecs;
@@ -615,6 +615,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 			break;
 		}
 	}
+	*/
 	
 #if ID_OD_WIFI
 
@@ -627,23 +628,28 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 #else
 	// Pack the WiFi data.
 	// One group every 300ms and another every 3000ms.
+	wifi_tx_flag_1 = 1;
+	
 	if (wifi_tx_flag_1)
 	{
 		UAS_data.SystemValid = 1;
 		UAS_data.LocationValid = 1;
-		if (UAS_data.BasicID[0].UASID[0])
+
+		UAS_data.SelfIDValid = 1;
+		
+		//if (UAS_data.BasicID[0].UASID[0])
 		{
 			UAS_data.BasicIDValid[0] = 1;
 		}
 		
-		if (UAS_data.OperatorID.OperatorId[0])
+		//if (UAS_data.OperatorID.OperatorId[0])
 		{
 			UAS_data.OperatorIDValid = 1;
 		}
 		
 		status = ID_OpenDrone_transmit_wifi(utm_data);
 	}
-	
+	else if(wifi_tx_flag_2)
 	{
 		for (i = 0; (i < auth_page_count)&&(i < ODID_AUTH_MAX_PAGES); ++i)
 		{
@@ -776,7 +782,7 @@ int ID_OpenDrone_transmit_ble(uint8_t *odid_msg, int length)
 	return 0;
 }
 
-void ID_OpenDrone_utm_message_pack(struct UTM_data *indata)
+void ID_OpenDrone_utm_message_pack(ODID_UAS_Data *outdata, struct UTM_data *indata)
 {
 	// BasicID
 	basicID_data->UAType = 2;

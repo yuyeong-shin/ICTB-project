@@ -633,23 +633,73 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 	if (wifi_tx_flag_1)
 	{
 		UAS_data.SystemValid = 1;
+		// encode system message 
+		{
+			system_data->OperatorLocationType = ODID_OPERATOR_LOCATION_TYPE_FIXED; // 0=TakeOff, 1=Live GNSS, 2=Fixed Location
+			system_data->ClassificationType = ODID_CLASSIFICATION_TYPE_EU;
+			system_data->OperatorLatitude = 36.740751;
+			system_data->OperatorLongitude = 127.119139;
+			system_data->AreaCount = 1;
+			system_data->AreaRadius = 0;
+			system_data->AreaCeiling = 0;
+			system_data->AreaFloor = 0;
+			system_data->CategoryEU = ODID_CATEGORY_EU_UNDECLARED;
+			system_data->ClassEU = ODID_CLASS_EU_UNDECLARED;
+			system_data->Timestamp = 0;
+		}
+		
 		UAS_data.LocationValid = 1;
-
+		// encode location message
+		{
+			location_data->Direction       = (float) utm_data->heading;
+			location_data->SpeedHorizontal = 0.514444 * (float) utm_data->speed_kn;
+			location_data->SpeedVertical   = INV_SPEED_V;
+			location_data->Latitude        = utm_data->latitude_d;
+			location_data->Longitude       = utm_data->longitude_d;
+			location_data->Height          = utm_data->alt_agl_m;
+			location_data->AltitudeGeo     = utm_data->alt_msl_m;
+    
+			location_data->TimeStamp       = (float)((utm_data->minutes * 60) + utm_data->seconds) +
+			                                 0.01 * (float) utm_data->csecs;
+		}
+		
 		UAS_data.SelfIDValid = 1;
+		// encode selfid message
+		{
+			selfID_data->DescType = 0;
+			//selfID_data->Desc = NULL;
+			strcpy(selfID_data->Desc, "KATECH_TestModule_No:01");
+			
+		}
 		
 		//if (UAS_data.BasicID[0].UASID[0])
 		{
 			UAS_data.BasicIDValid[0] = 1;
+			//encode basicid message 
+			{
+				basicID_data->UAType = 2;
+				basicID_data->IDType = 3;
+				strcpy(basicID_data->UASID, "3406820");
+			}
 		}
 		
 		//if (UAS_data.OperatorID.OperatorId[0])
 		{
 			UAS_data.OperatorIDValid = 1;
+			// encode operatorid message
+			{
+				operatorID_data->OperatorIdType = ODID_OPERATOR_ID;
+				//strcpy(operatorID_data->OperatorId, "OPERATORID");
+			}
 		}
+//		for (i = 0; (i < auth_page_count)&&(i < ODID_AUTH_MAX_PAGES); ++i)
+//		{
+//			UAS_data.AuthValid[i] = 1;
+//		}
 		
 		status = ID_OpenDrone_transmit_wifi(utm_data);
 	}
-	else if(wifi_tx_flag_2)
+/*	else if(wifi_tx_flag_2)
 	{
 		for (i = 0; (i < auth_page_count)&&(i < ODID_AUTH_MAX_PAGES); ++i)
 		{
@@ -658,6 +708,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		
 		status = ID_OpenDrone_transmit_wifi(utm_data);
 	}
+*/
 	
 #endif  //0 Pack data
 	
@@ -685,7 +736,7 @@ int ID_OpenDrone_transmit_wifi(struct UTM_data *utm_data)
 	
 	if ((length = odid_wifi_build_message_pack_nan_action_frame(&UAS_data, (char *)WiFi_mac_addr, ++send_counter, buffer, sizeof(buffer))) > 0)
 	{
-		printf("%lf\r\n", UAS_data.Location.Latitude);
+		//printf("%lf\r\n", UAS_data.Location.Latitude);
 		wifi_status = esp_wifi_80211_tx(WIFI_IF_AP, buffer, length, true);
 	}
 	

@@ -141,9 +141,12 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 		
 		utm_data.satellites = 1;
 		
-		utm_data.latitude_d = 37.5417874;
-		utm_data.longitude_d = 126.9416684;
+		// test mode No:01
+		utm_data.latitude_d = 37.5060638;
+		utm_data.longitude_d = 126.8726285;
 		utm_data.alt_agl_m = 23;
+		utm_data.alt_msl_m = 12;
+		utm_data.base_alt_m = 30;
 		utm_data.heading = 144;
 		utm_data.speed_kn = 33;
 			
@@ -224,10 +227,10 @@ void app_main(void)
 	xTaskCreate(task_opendroneid_wifi, "WIFI", 4096, NULL, PRIO_TASK_WIFI, NULL);
 	
 	// GPS Test data
-	utm_data.base_latitude  = 36.740751;
-	utm_data.base_longitude = 127.119139;
-	utm_data.base_alt_m     = 80.0;
-
+	utm_data.base_latitude  = 37.5047627;
+	utm_data.base_longitude = 126.8750924; //STX W Tower
+	utm_data.base_alt_m     = 30.0;
+	
 	utm_data.base_valid = 1;
 	
 	while (1)

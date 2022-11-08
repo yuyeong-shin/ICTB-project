@@ -668,7 +668,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		{
 			selfID_data->DescType = 0;
 			//selfID_data->Desc = NULL;
-			strcpy(selfID_data->Desc, "KATECH_TestModule_No:01");
+			strcpy(selfID_data->Desc, "KATECH_TestModule_No:05");
 			
 		}
 		
@@ -679,7 +679,16 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 			{
 				basicID_data->UAType = 2;
 				basicID_data->IDType = 3;
-				strcpy(basicID_data->UASID, "3406820");
+				// test module no 01
+				//strcpy(basicID_data->UASID, "3406820");
+				// test module no 02
+				//strcpy(basicID_data->UASID, "3406822");
+				// test module no 03
+				//strcpy(basicID_data->UASID, "3406824");
+				// test module no 04
+				//strcpy(basicID_data->UASID, "3406826");
+				// test module no 05
+				strcpy(basicID_data->UASID, "3406828");
 			}
 		}
 		

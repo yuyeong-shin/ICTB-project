@@ -141,9 +141,21 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 		
 		utm_data.satellites = 1;
 		
-		// test mode No:01
-		utm_data.latitude_d = 37.5060638;
-		utm_data.longitude_d = 126.8726285;
+		// test module No:01
+//		utm_data.latitude_d = 37.5060638;
+//		utm_data.longitude_d = 126.8726285;
+		// test module No:02
+//		utm_data.latitude_d = 37.5094697;
+//		utm_data.longitude_d = 126.8821053;
+		// test module No:03
+		//utm_data.latitude_d = 37.5032568;
+		//utm_data.longitude_d = 126.8743027;
+		// test module No:04
+		//utm_data.latitude_d = 37.5022703;
+		//utm_data.longitude_d = 126.8744127;
+		// test module No:05
+		utm_data.latitude_d = 37.5047802;
+		utm_data.longitude_d = 126.8729027;
 		utm_data.alt_agl_m = 23;
 		utm_data.alt_msl_m = 12;
 		utm_data.base_alt_m = 30;
@@ -183,7 +195,7 @@ void app_main(void)
 	vTaskDelay(pdMS_TO_TICKS(100));
 	
 	memset(&utm_parameters, 0, sizeof(utm_parameters));
-	strcpy(utm_parameters.UAS_operator, "KATECH_ODID_No:01");
+	strcpy(utm_parameters.UAS_operator, "KATECH_ODID_No:05");
 	
 	utm_parameters.region			= 2;
 	utm_parameters.EU_category		= 2;

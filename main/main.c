@@ -19,14 +19,14 @@
 #include "esp_timer.h"
 #include "nvs_flash.h"
 
+#include "global_variables.h"
+
 #include "id_open.h"
 #include "nmea_parser.h"
 #include "katech_esp_gpio.h"
 
 #include "driver/rmt.h"
 #include "led_strip.h"
-
-#include "driver/adc.h"
 
 // FreeRTOS SET
 #define STATS_TICKS         pdMS_TO_TICKS(1000)
@@ -49,9 +49,6 @@
 
 #define EXAMPLE_CHASE_SPEED_MS (1000)
 
-
-// for ADC SET
-#define ADC1_CHAN7		ADC1_CHANNEL_7
 
 static SemaphoreHandle_t sem_;
 static SemaphoreHandle_t sem_led;
@@ -77,6 +74,11 @@ static void timer_callback(void *arg)
 	else if (g_timer_cnt % 10 == 3)
 	{
 		xSemaphoreGive(sem_led);
+	}
+	
+	if (g_timer_cnt % 100 == 5)
+	{
+		xSemaphoreGive(sem_adc);
 	}
 	
 }
@@ -251,6 +253,8 @@ void app_main(void)
 	
 	printf("Hello world!\n");
 	
+	Init_global_variables();
+		
 	// OpendroneID Init
 	ID_OpenDrone_init();
 	vTaskDelay(pdMS_TO_TICKS(100));
@@ -275,6 +279,8 @@ void app_main(void)
 	// for Switch Input (GPIO interrupt)
 	katech_esp_gpio_init();
 
+	// for Battery ADC 
+	katech_esp_adc_init();
 	// Timer Start
 	timer_init();
 	

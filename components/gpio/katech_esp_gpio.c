@@ -6,6 +6,10 @@
 //static xQueueHandle gpio_evt_queue = NULL;
 static SemaphoreHandle_t gpio_isr_sem;
 
+bool cali_enable = 0;
+static int adc_raw;
+static esp_adc_cal_characteristics_t adc_chars;
+
 static void IRAM_ATTR gpio_isr_handler(void* arg)
 {
 	uint32_t gpio_num = (uint32_t) arg;
@@ -53,6 +57,26 @@ static void task_switch_mode_change(void* arg)
 	}
 }
 
+static void task_adc(void* arg)
+{
+	uint32_t voltage = 0;
+	
+	for (;;)
+	{
+		if (xSemaphoreTake(sem_adc, (TickType_t) portMAX_DELAY) == pdTRUE)
+		{
+			adc_raw = adc1_get_raw(ADC1_CHANNEL_7);
+			ESP_LOGI("ADC_RAW", "raw data: %d", adc_raw);
+			
+			if (cali_enable)
+			{
+				voltage = esp_adc_cal_raw_to_voltage(adc_raw, &adc_chars) * 2;
+				ESP_LOGI("ADC_VOLT", "cali data: %d mV", voltage);
+			}
+		}
+	}
+}
+
 
 void katech_esp_gpio_init(void)
 {
@@ -82,4 +106,33 @@ void katech_esp_gpio_init(void)
 	ESP_ERROR_CHECK(gpio_isr_handler_add(GPIO_INPUT_IO_1, gpio_isr_handler, (void*) GPIO_INPUT_IO_1));
 	
 
+}
+
+void katech_esp_adc_init(void)
+{
+	esp_err_t ret;
+	
+	ret = esp_adc_cal_check_efuse(ADC_EXAMPLE_CALI_SCHEME);
+	if (ret == ESP_ERR_NOT_SUPPORTED)
+	{
+		ESP_LOGW("ADC", "Calibration scheme not supported, skip software calibration");
+	}
+	else if (ret == ESP_ERR_INVALID_VERSION) {
+		ESP_LOGW("ADC", "eFuse not burnt, skip software calibration");
+	}
+	else if (ret == ESP_OK) {
+		cali_enable = true;
+		esp_adc_cal_characterize(ADC_UNIT_1, ADC_EXAMPLE_ATTEN, ADC_WIDTH_BIT_DEFAULT, 0, &adc_chars);
+	}
+	else {
+		ESP_LOGE("ADC", "Invalid arg");
+	}
+	
+	//ADC config
+	ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_DEFAULT));
+	ESP_ERROR_CHECK(adc1_config_channel_atten(ADC1_CHANNEL_7, ADC_EXAMPLE_ATTEN));
+	
+	//start adc task
+	xTaskCreate(task_adc, "task_adc", 2048, NULL, 10, NULL);
+		
 }

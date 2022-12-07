@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "esp-idf/gpio/libgpio.a"
+			"path" : "esp-idf/global_variables/libglobal_variables.a"
 		}
 	],
 	"backtrace" : 2,
@@ -22,7 +22,7 @@
 		"files" : 
 		[
 			"C:/SysGCC/esp32/esp-idf/v4.4.1/tools/cmake/component.cmake",
-			"components/gpio/CMakeLists.txt",
+			"components/global_variables/CMakeLists.txt",
 			"C:/SysGCC/esp32/esp-idf/v4.4.1/tools/cmake/utilities.cmake"
 		],
 		"nodes" : 
@@ -199,7 +199,7 @@
 				},
 				{
 					"backtrace" : 9,
-					"path" : "C:/Users/yuyeong/source/repos/ICTB_project/ICTB_project/components/gpio"
+					"path" : "C:/Users/yuyeong/source/repos/ICTB_project/ICTB_project/components/global_variables"
 				},
 				{
 					"backtrace" : 2,
@@ -412,13 +412,13 @@
 			"id" : "__idf_esp_ringbuf::@ad62994b1ce98b81017d"
 		}
 	],
-	"id" : "__idf_gpio::@2da138fbada5ed6e3d48",
-	"name" : "__idf_gpio",
-	"nameOnDisk" : "libgpio.a",
+	"id" : "__idf_global_variables::@262b87b20ab2b7d85c9f",
+	"name" : "__idf_global_variables",
+	"nameOnDisk" : "libglobal_variables.a",
 	"paths" : 
 	{
-		"build" : "esp-idf/gpio",
-		"source" : "components/gpio"
+		"build" : "esp-idf/global_variables",
+		"source" : "components/global_variables"
 	},
 	"sourceGroups" : 
 	[
@@ -435,7 +435,7 @@
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "components/gpio/katech_esp_gpio.c",
+			"path" : "components/global_variables/global_variables.c",
 			"sourceGroupIndex" : 0
 		}
 	],

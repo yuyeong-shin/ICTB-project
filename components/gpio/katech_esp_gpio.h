@@ -9,18 +9,13 @@
 #include "freertos/queue.h"
 #include "driver/gpio.h"
 
-#include "driver/rmt.h"
+//#include "driver/rmt.h"
 //#include "led_strip.h"
 
 #define GPIO_INPUT_IO_1		5
 #define GPIO_INPUT_PIN_SEL  ((1ULL<<GPIO_INPUT_IO_1))
 #define ESP_INTR_FLAG_DEFAULT 0
 
-#define CONFIG_EXAMPLE_RMT_TX_GPIO 48
-#define CONFIG_EXAMPLE_STRIP_LED_NUMBER 24
-#define RMT_TX_CHANNEL RMT_CHANNEL_0
-
-#define EXAMPLE_CHASE_SPEED_MS (1000)
 
 u_int32_t g_timer_cnt;
 

@@ -58,7 +58,7 @@
         <GroupSourcesByTypes>true</GroupSourcesByTypes>
         <GroupSourcesByPaths>true</GroupSourcesByPaths>
         <GroupTargetsByPaths>true</GroupTargetsByPaths>
-        <FollowCMakeSourceGroups>false</FollowCMakeSourceGroups>
+        <FollowCMakeSourceGroups>true</FollowCMakeSourceGroups>
         <AutoRefreshProject>true</AutoRefreshProject>
         <AlwaysConsiderOutdated>false</AlwaysConsiderOutdated>
         <SortTargetsByName>true</SortTargetsByName>

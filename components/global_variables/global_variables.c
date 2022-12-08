@@ -5,5 +5,8 @@ void Init_global_variables(void)
 {
 	sem_adc = xSemaphoreCreateBinary();
 	
+	
+	voltage = 0;
+	
 	global_status = 0;
 }

@@ -21,7 +21,7 @@
 #define ESP_INTR_FLAG_DEFAULT 0
 
 //ADC Attenuation
-#define ADC_EXAMPLE_ATTEN           ADC_ATTEN_DB_11
+#define ADC_EXAMPLE_ATTEN           ADC_ATTEN_DB_11		//for 0 ~ 3100mV
 //ADC Calibration
 #define ADC_EXAMPLE_CALI_SCHEME     ESP_ADC_CAL_VAL_EFUSE_TP_FIT
 

@@ -76,10 +76,16 @@ static void timer_callback(void *arg)
 		xSemaphoreGive(sem_led);
 	}
 	
-	if (g_timer_cnt % 100 == 5)
+	if (g_timer_cnt % 10 == 5)
 	{
 		xSemaphoreGive(sem_adc);
 	}
+	
+	if (g_timer_cnt % 10 == 9)
+	{
+		ESP_LOGI("STATE", "state mode: %d", global_status);
+	}
+	
 	
 }
 
@@ -109,6 +115,10 @@ static void task_opendroneid_wifi(void *arg)
 //			printf("Semaphore take count: %d, Tick: %d\r\n", take_count++, xTaskGetTickCount());
 //			printf("%.7f\r\n", utm_data.latitude_d);
 			ID_OpenDrone_transmit(&utm_data);
+			if (global_status != 4)
+			{
+				global_status = 1;
+			}
 			//ID_OpenDrone_transmit_wifi(&utm_data);
 			xSemaphoreGiveRecursive(mut_);
 			//ID_OpenDrone_transmit_wifi(&utm_data);
@@ -136,7 +146,36 @@ static void task_led_status(void *arg)
 	{
 		if (xSemaphoreTake(sem_led, (TickType_t) 3000) == pdTRUE)
 		{
+			strip->clear(strip, 50);
 			
+			if (global_status == 0)
+			{
+				ESP_ERROR_CHECK(strip->set_pixel(strip, 0, 255 / 20, 255 / 20, 255 / 20)); // White
+				ESP_ERROR_CHECK(strip->refresh(strip, 100));
+			}
+			else if (global_status == 1)
+			{
+				ESP_ERROR_CHECK(strip->set_pixel(strip, 0, 0 / 20, 255 / 20, 0 / 20)); // Green
+				ESP_ERROR_CHECK(strip->refresh(strip, 100));
+			}
+			else if (global_status == 2)
+			{
+				
+			}
+			else if (global_status == 3)
+			{
+				ESP_ERROR_CHECK(strip->set_pixel(strip, 0, 0 / 20, 0 / 20, 255 / 20)); // Blue
+				ESP_ERROR_CHECK(strip->refresh(strip, 100));
+			}
+			else if (global_status == 4)
+			{
+				ESP_ERROR_CHECK(strip->set_pixel(strip, 0, 255 / 20, 0 / 20, 0 / 20)); // Red
+				ESP_ERROR_CHECK(strip->refresh(strip, 100));
+			}
+			else
+			{
+				
+			}
 					
 		}
 		else
@@ -351,7 +390,7 @@ void init_rmt_led(void)
 		
 	vTaskDelay(1000 / portTICK_PERIOD_MS);
 	
-	ESP_ERROR_CHECK(strip->set_pixel(strip, 0, 0, 180/20, 0/20));
+	ESP_ERROR_CHECK(strip->set_pixel(strip, 0, 255/20, 255/20, 255/20));		// White
 	ESP_ERROR_CHECK(strip->refresh(strip, 100));
 }
 

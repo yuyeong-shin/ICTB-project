@@ -59,8 +59,7 @@ static void task_switch_mode_change(void* arg)
 
 static void task_adc(void* arg)
 {
-	uint32_t voltage = 0;
-	
+
 	for (;;)
 	{
 		if (xSemaphoreTake(sem_adc, (TickType_t) portMAX_DELAY) == pdTRUE)
@@ -71,7 +70,13 @@ static void task_adc(void* arg)
 			if (cali_enable)
 			{
 				voltage = esp_adc_cal_raw_to_voltage(adc_raw, &adc_chars) * 2;
+				
+				if (voltage <= 3400)
+				{
+					global_status = 4;
+				}
 				ESP_LOGI("ADC_VOLT", "cali data: %d mV", voltage);
+			//	ESP_LOGI("ADC_BITWIDTH", "adc bit: %d", ADC_WIDTH_BIT_DEFAULT);
 			}
 		}
 	}
@@ -122,14 +127,16 @@ void katech_esp_adc_init(void)
 	}
 	else if (ret == ESP_OK) {
 		cali_enable = true;
-		esp_adc_cal_characterize(ADC_UNIT_1, ADC_EXAMPLE_ATTEN, ADC_WIDTH_BIT_DEFAULT, 0, &adc_chars);
+//		esp_adc_cal_characterize(ADC_UNIT_1, ADC_EXAMPLE_ATTEN, ADC_WIDTH_BIT_DEFAULT, 0, &adc_chars);  // max 12bit adc ADC_WIDTH_12Bit
+		esp_adc_cal_characterize(ADC_UNIT_1, ADC_EXAMPLE_ATTEN, ADC_WIDTH_12Bit, 0, &adc_chars); // max 12bit adc ADC_WIDTH_12Bit
 	}
 	else {
 		ESP_LOGE("ADC", "Invalid arg");
 	}
 	
 	//ADC config
-	ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_DEFAULT));
+//	ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_DEFAULT));
+	ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_12Bit));
 	ESP_ERROR_CHECK(adc1_config_channel_atten(ADC1_CHANNEL_7, ADC_EXAMPLE_ATTEN));
 	
 	//start adc task

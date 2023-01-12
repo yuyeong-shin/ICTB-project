@@ -36,6 +36,8 @@
 
 #include "opendroneid.h"
 
+#include "../global_variables/global_variables.h"
+
 
 void ID_OpenDrone_init(void);
 void ID_OpenDrone_param_init(struct UTM_parameters *parameters);

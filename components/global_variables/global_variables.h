@@ -27,6 +27,11 @@ uint16_t		global_status;
 uint32_t voltage;
 void Init_global_variables(void);
 
+// Operator start position
+uint8_t gps_start_flag;
+double g_OperatorLatitude;
+double g_OperatorLongitude;
 
+float  g_OperatorAltitude;
 
 #endif

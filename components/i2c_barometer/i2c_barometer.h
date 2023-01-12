@@ -148,4 +148,4 @@ esp_err_t ms5611_init(ms5611_t *dev, ms5611_osr_t osr);
  */
 esp_err_t ms5611_get_sensor_data(ms5611_t *dev, int32_t *pressure, float *temperature);
 
-#endif
+#endif

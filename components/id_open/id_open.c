@@ -637,8 +637,8 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		{
 			system_data->OperatorLocationType = ODID_OPERATOR_LOCATION_TYPE_FIXED; // 0=TakeOff, 1=Live GNSS, 2=Fixed Location
 			system_data->ClassificationType = ODID_CLASSIFICATION_TYPE_EU;
-			system_data->OperatorLatitude = 36.740751;
-			system_data->OperatorLongitude = 127.119139;
+			system_data->OperatorLatitude = g_OperatorLatitude;
+			system_data->OperatorLongitude = g_OperatorLongitude;
 			system_data->AreaCount = 1;
 			system_data->AreaRadius = 0;
 			system_data->AreaCeiling = 0;
@@ -668,7 +668,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		{
 			selfID_data->DescType = 0;
 			//selfID_data->Desc = NULL;
-			strcpy(selfID_data->Desc, "KATECH_TestModule_No:05");
+			strcpy(selfID_data->Desc, "ASSETTA_TEST_MODULE");
 			
 		}
 		
@@ -864,7 +864,8 @@ void ID_OpenDrone_utm_message_pack(ODID_UAS_Data *outdata, struct UTM_data *inda
 	                                 0.01 * (float) indata->csecs;
 	
 	// SelfID
-	selfID_data->DescType = 0;
+//	selfID_data->DescType = 0;
+//	strcpy(selfID_data->Desc, "SelfID");
 	//selfID_data->Desc = NULL;
 	
 	// System

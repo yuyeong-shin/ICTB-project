@@ -216,22 +216,39 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 			gps->longitude,
 			gps->altitude,
 			gps->speed);*/
-//		utm_data.years = (int)gps->date.year + YEAR_BASE;
-//		utm_data.months = (int)gps->date.month;
-//		utm_data.days = (int)gps->date.day;
-//		utm_data.hours = (int)gps->tim.hour + TIME_ZONE;
-//		utm_data.minutes = (int)gps->tim.minute;
-//		utm_data.seconds = (int)gps->tim.second;
-//		utm_data.csecs = (int)gps->tim.thousand;
-//		
-//		utm_data.satellites = (int)gps->sats_in_use;
-//		
-//		utm_data.latitude_d = (double)gps->latitude;
-//		utm_data.longitude_d = (double)gps->longitude;
-//		utm_data.alt_agl_m = gps->altitude;
-//		utm_data.heading = (int)gps->cog;
-//		utm_data.speed_kn = (int)gps->speed;
+		utm_data.years = (int)gps->date.year + YEAR_BASE;
+		utm_data.months = (int)gps->date.month;
+		utm_data.days = (int)gps->date.day;
+		utm_data.hours = (int)gps->tim.hour + TIME_ZONE;
+		utm_data.minutes = (int)gps->tim.minute;
+		utm_data.seconds = (int)gps->tim.second;
+		utm_data.csecs = (int)gps->tim.thousand;
 		
+		utm_data.satellites = (int)gps->sats_in_use;
+		
+		utm_data.latitude_d = (double)gps->latitude;
+		utm_data.longitude_d = (double)gps->longitude;
+		utm_data.alt_agl_m = gps->altitude;
+		utm_data.heading = (int)gps->cog;
+		utm_data.speed_kn = (int)gps->speed;
+		//printf("%d\r\n", gps->valid);
+		if (gps->valid == 1)
+		{
+			if (gps_start_flag == 0)
+			{
+				
+				g_OperatorLatitude = (double)gps->latitude; 
+				
+				g_OperatorLongitude = (double)gps->longitude;
+				
+				g_OperatorAltitude = (float)gps->altitude;
+				utm_data.base_valid = gps->valid;
+				
+				gps_start_flag = 1;
+			}	
+		}
+		
+/*		
 		utm_data.years = 2022;
 		utm_data.months = 10;
 		utm_data.days = 6;
@@ -241,7 +258,7 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 		utm_data.csecs = 123;
 		
 		utm_data.satellites = 1;
-		
+*/		
 		// test module No:01
 //		utm_data.latitude_d = 37.5060638;
 //		utm_data.longitude_d = 126.8726285;
@@ -255,13 +272,13 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 		//utm_data.latitude_d = 37.5022703;
 		//utm_data.longitude_d = 126.8744127;
 		// test module No:05
-		utm_data.latitude_d = 37.5047802;
+/*		utm_data.latitude_d = 37.5047802;
 		utm_data.longitude_d = 126.8729027;
 		utm_data.alt_agl_m = 23;
 		utm_data.alt_msl_m = 12;
 		utm_data.base_alt_m = 30;
 		utm_data.heading = 144;
-		utm_data.speed_kn = 33;
+		utm_data.speed_kn = 33;*/
 			
 		break;
 	case GPS_UNKNOWN:
@@ -299,7 +316,7 @@ void app_main(void)
 	vTaskDelay(pdMS_TO_TICKS(100));
 	
 	memset(&utm_parameters, 0, sizeof(utm_parameters));
-	strcpy(utm_parameters.UAS_operator, "KATECH_ODID_No:05");
+	strcpy(utm_parameters.UAS_operator, "ASSETTA");
 	
 	utm_parameters.region			= 2;
 	utm_parameters.EU_category		= 2;
@@ -348,11 +365,11 @@ void app_main(void)
 	xTaskCreate(task_led_status, "LED_STATUS", 2048, NULL, PRIO_TASK_LED, NULL);
 	
 	// GPS Test data
-	utm_data.base_latitude  = 37.5047627;
-	utm_data.base_longitude = 126.8750924; //STX W Tower
-	utm_data.base_alt_m     = 30.0;
+//	utm_data.base_latitude  = 37.5047627;
+//	utm_data.base_longitude = 126.8750924; //STX W Tower
+//	utm_data.base_alt_m     = 30.0;
 	
-	utm_data.base_valid = 1;
+//	utm_data.base_valid = 1;
 	
 	while (1)
 	{

@@ -546,15 +546,15 @@
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/protobuf-c/protobuf-c"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 8,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/mdns/include"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 8,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/console"
 				},
 				{
-					"backtrace" : 8,
+					"backtrace" : 7,
 					"path" : "C:/SysGCC/esp32/esp-idf/v4.4.1/components/json/cJSON"
 				}
 			],
@@ -594,11 +594,11 @@
 		},
 		{
 			"backtrace" : 7,
-			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
+			"id" : "__idf_json::@c78a8bdc820334f01148"
 		},
 		{
 			"backtrace" : 8,
-			"id" : "__idf_json::@c78a8bdc820334f01148"
+			"id" : "__idf_mdns::@2f076c6da9dadb273cdc"
 		}
 	],
 	"id" : "__idf_wifi_provisioning::@9d7e7ffe1b15746c1098",

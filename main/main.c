@@ -26,7 +26,8 @@
 #include "katech_esp_gpio.h"
 
 #include "driver/rmt.h"
-#include "led_strip.h"
+#include "katech_rgb_led.h"
+//#include "tinyusb/tinyusb/hw/bsp/esp32s3/components/led_strip/include/led_strip.h"
 
 // FreeRTOS SET
 #define STATS_TICKS         pdMS_TO_TICKS(1000)
@@ -316,7 +317,7 @@ void app_main(void)
 	vTaskDelay(pdMS_TO_TICKS(100));
 	
 	memset(&utm_parameters, 0, sizeof(utm_parameters));
-	strcpy(utm_parameters.UAS_operator, "ASSETTA");
+	//strcpy(utm_parameters.UAS_operator, "ASSETTA");
 	
 	utm_parameters.region			= 2;
 	utm_parameters.EU_category		= 2;

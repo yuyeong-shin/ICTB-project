@@ -668,7 +668,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		{
 			selfID_data->DescType = 0;
 			//selfID_data->Desc = NULL;
-			strcpy(selfID_data->Desc, "ASSETTA_TEST_MODULE_AST-23010");
+			strcpy(selfID_data->Desc, "ASSETTA_TEST_AST-23001");
 			
 		}
 		
@@ -680,7 +680,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 				basicID_data->UAType = 2;
 				basicID_data->IDType = 3;
 				
-				strcpy(basicID_data->UASID, "2302010");
+				strcpy(basicID_data->UASID, "2302001");
 			}
 		}
 		
@@ -690,7 +690,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 			// encode operatorid message
 			{
 				operatorID_data->OperatorIdType = ODID_OPERATOR_ID;
-				strcpy(operatorID_data->OperatorId, "AST-TEST-OP-010");
+				strcpy(operatorID_data->OperatorId, "AST-TEST-OP-001");
 			}
 		}
 //		for (i = 0; (i < auth_page_count)&&(i < ODID_AUTH_MAX_PAGES); ++i)

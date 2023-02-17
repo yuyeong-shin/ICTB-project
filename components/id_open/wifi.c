@@ -422,6 +422,7 @@ int odid_wifi_build_message_pack_nan_action_frame(ODID_UAS_Data *UAS_Data,
 	len += sizeof(*si);
 
 	ret = odid_message_build_pack(UAS_Data, buf + len, buf_size - len);
+	
 	if (ret < 0)
 		return ret;
 	len += ret;

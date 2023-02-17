@@ -653,9 +653,9 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 	
 	sPosition[0] = circle_path(id, 36.741679, 127.119694, 100);
 
-	sPosition[0].speed = sqrt((sPosition[0].x - sPosition[1].x)*(sPosition[0].x - sPosition[1].x)
-								+ (sPosition[0].y - sPosition[1].y)*(sPosition[0].y - sPosition[1].y));
-	sPosition[0].heading = atan((sPosition[0].x - sPosition[1].x) / (sPosition[0].y - sPosition[1].y)) * 180 / 3.14;
+	sPosition[0].speed = 13;//sqrt((sPosition[0].x - sPosition[1].x)*(sPosition[0].x - sPosition[1].x)
+							//	+ (sPosition[0].y - sPosition[1].y)*(sPosition[0].y - sPosition[1].y));
+	sPosition[0].heading = 350;//atan((sPosition[0].x - sPosition[1].x) / (sPosition[0].y - sPosition[1].y)) * 180 / 3.14;
 	
 	//printf("%lf %lf %lf %lf\r\n", sPosition[0].latitude, sPosition[0].longitude, sPosition[0].heading, sPosition[0].speed);
 	// Pack the WiFi data.
@@ -684,9 +684,9 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		// encode location message
 		{
 			//location_data->Direction       = 60.0;//(float) utm_data->heading;
-			location_data->Direction       = sPosition[0].heading; //(float) utm_data->heading;
+			location_data->Direction       = (float)sPosition[0].heading; //(float) utm_data->heading;
 			//location_data->SpeedHorizontal = 13;//0.514444 * (float) utm_data->speed_kn;
-			location_data->SpeedHorizontal = sPosition[0].speed; //0.514444 * (float) utm_data->speed_kn;
+			location_data->SpeedHorizontal = (float)sPosition[0].speed; //0.514444 * (float) utm_data->speed_kn;
 			location_data->SpeedVertical   = INV_SPEED_V;
 			//location_data->Latitude        = 36.741679;//utm_data->latitude_d;
 			//location_data->Longitude       = 127.119694;//utm_data->longitude_d;
@@ -706,17 +706,17 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 			//selfID_data->Desc = NULL;
 			if (id == 0)
 			{
-			//	strcpy(selfID_data->Desc, "TEST_MODULE_NO01");
+				strcpy(selfID_data->Desc, "TEST_MODULE_NO0111111111");
 			}
 			else if (id == 1)
 			{
-				strcpy(selfID_data->Desc, "TEST_MODULE_NO02");
+				strcpy(selfID_data->Desc, "TEST_MODULE_NO0222222222");
 			}
 			else if (id == 2)
 			{
-				strcpy(selfID_data->Desc, "TEST_MODULE_NO03");
+				strcpy(selfID_data->Desc, "TEST_MODULE_NO0333333333");
 			}
-			strcpy(selfID_data->Desc, "KATECH_TEST_MODULE");
+			//strcpy(selfID_data->Desc, "KATECH_TEST_MODULE");
 			
 		}
 		
@@ -730,7 +730,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 				
 				if (id == 0)
 				{
-				//	strcpy(basicID_data->UASID, "2302221");
+					strcpy(basicID_data->UASID, "2302221");
 				}
 				else if (id == 1)
 				{
@@ -740,7 +740,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 				{
 					strcpy(basicID_data->UASID, "2302223");
 				}
-				strcpy(basicID_data->UASID, "1234555");
+				//strcpy(basicID_data->UASID, "1234555");
 			}
 		}
 		
@@ -753,7 +753,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 				
 				if (id == 0)
 				{
-				//	strcpy(operatorID_data->OperatorId, "ASSETTA_USER_01");
+					strcpy(operatorID_data->OperatorId, "ASSETTA_USER_01");
 				}
 				else if (id == 1)
 				{
@@ -763,14 +763,14 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 				{
 					strcpy(operatorID_data->OperatorId, "ASSETTA_USER_03");
 				}
-				strcpy(operatorID_data->OperatorId, "KATECH_USER");
+				//strcpy(operatorID_data->OperatorId, "KATECH_USER");
 			}
 		}
 //		for (i = 0; (i < auth_page_count)&&(i < ODID_AUTH_MAX_PAGES); ++i)
 //		{
 //			UAS_data.AuthValid[i] = 1;
 //		}
-		printf("%lf %lf\r\n", location_data->Latitude, location_data->Longitude);
+		
 		status = ID_OpenDrone_transmit_wifi(utm_data);
 		
 //		if (id >= 2)
@@ -821,6 +821,7 @@ int ID_OpenDrone_transmit_wifi(struct UTM_data *utm_data)
 	if ((length = odid_wifi_build_message_pack_nan_action_frame(&UAS_data, (char *)WiFi_mac_addr, ++send_counter, buffer, sizeof(buffer))) > 0)
 	{
 		//printf("%lf\r\n", UAS_data.Location.Latitude);
+		//printf("action Wi-Fi NaN Frame   length = %d\r\n", length);
 		wifi_status = esp_wifi_80211_tx(WIFI_IF_AP, buffer, length, true);
 	}
 	
@@ -1239,7 +1240,7 @@ struct struct_Position circle_path(unsigned char id, double lat, double lon, dou
 	static unsigned int second = 0;
 	struct struct_Position return_position;
 	
-	static double theta = 0, w = 0.07;	// 'w' is rad/s
+	static double theta = 0, w = 0.1;	// 'w' is rad/s
 	static double heading = 0;
 	
 	memset(&return_position, 0, sizeof(return_position));

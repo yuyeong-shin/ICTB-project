@@ -43,7 +43,7 @@ unsigned char id = 0;
 void  GPS_gp2utm(double sphi, double slam, int *izone, double *y, double *x);
 void GPS_utm2gp(double *sphi, double *slam, int izone, double y, double x);
 struct struct_Position circle_path(unsigned char id, double lon, double lat, double radius);
-struct struct_Position sPosition[2];
+struct struct_Position sPosition[3][2];
 esp_err_t esp_wifi_80211_tx(wifi_interface_t ifx, const void *buffer, int len, bool en_sys_seq);
 /*
 // local function
@@ -644,18 +644,29 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 #else
 	
 	
-	sPosition[1].heading = sPosition[0].heading;
-	sPosition[1].latitude = sPosition[0].latitude;
-	sPosition[1].longitude = sPosition[0].longitude;
-	sPosition[1].x = sPosition[0].x;
-	sPosition[1].y = sPosition[0].y;
-	sPosition[1].speed = sPosition[0].speed;
+	sPosition[id][1].heading = sPosition[id][0].heading;
+	sPosition[id][1].latitude = sPosition[id][0].latitude;
+	sPosition[id][1].longitude = sPosition[id][0].longitude;
+	sPosition[id][1].x = sPosition[id][0].x;
+	sPosition[id][1].y = sPosition[id][0].y;
+	sPosition[id][1].speed = sPosition[id][0].speed;
 	
-	sPosition[0] = circle_path(id, 36.741679, 127.119694, 100);
+	if (id == 0)
+	{
+		sPosition[id][0] = circle_path(id, 36.741679, 127.119694, 100);	
+	}
+	else if (id == 1)
+	{
+		sPosition[id][0] = circle_path(id, 37.5926352, 126.9132056, 126);
+	}
+	else if (id == 2)
+	{
+		sPosition[id][0] = circle_path(id, 35.1696094, 129.1345419, 77);
+	}
 
-	sPosition[0].speed = 13;//sqrt((sPosition[0].x - sPosition[1].x)*(sPosition[0].x - sPosition[1].x)
+	sPosition[id][0].speed = 13; //sqrt((sPosition[0].x - sPosition[1].x)*(sPosition[0].x - sPosition[1].x)
 							//	+ (sPosition[0].y - sPosition[1].y)*(sPosition[0].y - sPosition[1].y));
-	sPosition[0].heading = 350;//atan((sPosition[0].x - sPosition[1].x) / (sPosition[0].y - sPosition[1].y)) * 180 / 3.14;
+	sPosition[id][0].heading = 350; //atan((sPosition[0].x - sPosition[1].x) / (sPosition[0].y - sPosition[1].y)) * 180 / 3.14;
 	
 	//printf("%lf %lf %lf %lf\r\n", sPosition[0].latitude, sPosition[0].longitude, sPosition[0].heading, sPosition[0].speed);
 	// Pack the WiFi data.
@@ -684,14 +695,14 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		// encode location message
 		{
 			//location_data->Direction       = 60.0;//(float) utm_data->heading;
-			location_data->Direction       = (float)sPosition[0].heading; //(float) utm_data->heading;
+			location_data->Direction       = (float)sPosition[id][0].heading; //(float) utm_data->heading;
 			//location_data->SpeedHorizontal = 13;//0.514444 * (float) utm_data->speed_kn;
-			location_data->SpeedHorizontal = (float)sPosition[0].speed; //0.514444 * (float) utm_data->speed_kn;
+			location_data->SpeedHorizontal = (float)sPosition[id][0].speed; //0.514444 * (float) utm_data->speed_kn;
 			location_data->SpeedVertical   = INV_SPEED_V;
 			//location_data->Latitude        = 36.741679;//utm_data->latitude_d;
 			//location_data->Longitude       = 127.119694;//utm_data->longitude_d;
-			location_data->Latitude        = sPosition[0].latitude; //utm_data->latitude_d;
-			location_data->Longitude       = sPosition[0].longitude; //utm_data->longitude_d;
+			location_data->Latitude        = sPosition[id][0].latitude; //utm_data->latitude_d;
+			location_data->Longitude       = sPosition[id][0].longitude; //utm_data->longitude_d;
 			location_data->Height          = 27;//utm_data->alt_agl_m;
 			location_data->AltitudeGeo     = 34;//utm_data->alt_msl_m;
     
@@ -773,14 +784,14 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		
 		status = ID_OpenDrone_transmit_wifi(utm_data);
 		
-//		if (id >= 2)
-//		{
-//			id = 0;
-//		}
-//		else 
-//		{
-//			id++;
-//		}
+		if (id >= 2)
+		{
+			id = 0;
+		}
+		else 
+		{
+			id++;
+		}
 		
 	}
 /*	else if(wifi_tx_flag_2)

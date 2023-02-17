@@ -65,7 +65,7 @@ static void task_adc(void* arg)
 		if (xSemaphoreTake(sem_adc, (TickType_t) portMAX_DELAY) == pdTRUE)
 		{
 			adc_raw = adc1_get_raw(ADC1_CHANNEL_7);
-			ESP_LOGI("ADC_RAW", "raw data: %d", adc_raw);
+//			ESP_LOGI("ADC_RAW", "raw data: %d", adc_raw);
 			
 			if (cali_enable)
 			{

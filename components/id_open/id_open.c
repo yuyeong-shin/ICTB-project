@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <inttypes.h>
+#include <math.h>
 
 #include "id_open.h"
 #include "utm.h"
@@ -28,6 +29,21 @@
 #include "lwip/ip_addr.h"
 #include "lwip/dns.h"
 
+struct struct_Position {
+	double latitude;
+	double longitude;
+	double x;
+	double y;
+	double heading;
+	double speed;
+} ;
+
+unsigned char id = 0;
+
+void  GPS_gp2utm(double sphi, double slam, int *izone, double *y, double *x);
+void GPS_utm2gp(double *sphi, double *slam, int izone, double y, double x);
+struct struct_Position circle_path(unsigned char id, double lon, double lat, double radius);
+struct struct_Position sPosition[2];
 esp_err_t esp_wifi_80211_tx(wifi_interface_t ifx, const void *buffer, int len, bool en_sys_seq);
 /*
 // local function
@@ -626,6 +642,22 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 	}
 	
 #else
+	
+	
+	sPosition[1].heading = sPosition[0].heading;
+	sPosition[1].latitude = sPosition[0].latitude;
+	sPosition[1].longitude = sPosition[0].longitude;
+	sPosition[1].x = sPosition[0].x;
+	sPosition[1].y = sPosition[0].y;
+	sPosition[1].speed = sPosition[0].speed;
+	
+	sPosition[0] = circle_path(id, 36.741679, 127.119694, 100);
+
+	sPosition[0].speed = sqrt((sPosition[0].x - sPosition[1].x)*(sPosition[0].x - sPosition[1].x)
+								+ (sPosition[0].y - sPosition[1].y)*(sPosition[0].y - sPosition[1].y));
+	sPosition[0].heading = atan((sPosition[0].x - sPosition[1].x) / (sPosition[0].y - sPosition[1].y)) * 180 / 3.14;
+	
+	//printf("%lf %lf %lf %lf\r\n", sPosition[0].latitude, sPosition[0].longitude, sPosition[0].heading, sPosition[0].speed);
 	// Pack the WiFi data.
 	// One group every 300ms and another every 3000ms.
 	wifi_tx_flag_1 = 1;
@@ -651,13 +683,17 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		UAS_data.LocationValid = 1;
 		// encode location message
 		{
-			location_data->Direction       = (float) utm_data->heading;
-			location_data->SpeedHorizontal = 0.514444 * (float) utm_data->speed_kn;
+			//location_data->Direction       = 60.0;//(float) utm_data->heading;
+			location_data->Direction       = sPosition[0].heading; //(float) utm_data->heading;
+			//location_data->SpeedHorizontal = 13;//0.514444 * (float) utm_data->speed_kn;
+			location_data->SpeedHorizontal = sPosition[0].speed; //0.514444 * (float) utm_data->speed_kn;
 			location_data->SpeedVertical   = INV_SPEED_V;
-			location_data->Latitude        = utm_data->latitude_d;
-			location_data->Longitude       = utm_data->longitude_d;
-			location_data->Height          = utm_data->alt_agl_m;
-			location_data->AltitudeGeo     = utm_data->alt_msl_m;
+			//location_data->Latitude        = 36.741679;//utm_data->latitude_d;
+			//location_data->Longitude       = 127.119694;//utm_data->longitude_d;
+			location_data->Latitude        = sPosition[0].latitude; //utm_data->latitude_d;
+			location_data->Longitude       = sPosition[0].longitude; //utm_data->longitude_d;
+			location_data->Height          = 27;//utm_data->alt_agl_m;
+			location_data->AltitudeGeo     = 34;//utm_data->alt_msl_m;
     
 			location_data->TimeStamp       = (float)((utm_data->minutes * 60) + utm_data->seconds) +
 			                                 0.01 * (float) utm_data->csecs;
@@ -668,7 +704,19 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		{
 			selfID_data->DescType = 0;
 			//selfID_data->Desc = NULL;
-			strcpy(selfID_data->Desc, "ASSETTA_TEST_AST-23001");
+			if (id == 0)
+			{
+			//	strcpy(selfID_data->Desc, "TEST_MODULE_NO01");
+			}
+			else if (id == 1)
+			{
+				strcpy(selfID_data->Desc, "TEST_MODULE_NO02");
+			}
+			else if (id == 2)
+			{
+				strcpy(selfID_data->Desc, "TEST_MODULE_NO03");
+			}
+			strcpy(selfID_data->Desc, "KATECH_TEST_MODULE");
 			
 		}
 		
@@ -680,7 +728,19 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 				basicID_data->UAType = 2;
 				basicID_data->IDType = 3;
 				
-				strcpy(basicID_data->UASID, "2302001");
+				if (id == 0)
+				{
+				//	strcpy(basicID_data->UASID, "2302221");
+				}
+				else if (id == 1)
+				{
+					strcpy(basicID_data->UASID, "2302222");
+				}
+				else if (id == 2)
+				{
+					strcpy(basicID_data->UASID, "2302223");
+				}
+				strcpy(basicID_data->UASID, "1234555");
 			}
 		}
 		
@@ -690,15 +750,38 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 			// encode operatorid message
 			{
 				operatorID_data->OperatorIdType = ODID_OPERATOR_ID;
-				strcpy(operatorID_data->OperatorId, "AST-TEST-OP-001");
+				
+				if (id == 0)
+				{
+				//	strcpy(operatorID_data->OperatorId, "ASSETTA_USER_01");
+				}
+				else if (id == 1)
+				{
+					strcpy(operatorID_data->OperatorId, "ASSETTA_USER_02");
+				}
+				else if (id == 2)
+				{
+					strcpy(operatorID_data->OperatorId, "ASSETTA_USER_03");
+				}
+				strcpy(operatorID_data->OperatorId, "KATECH_USER");
 			}
 		}
 //		for (i = 0; (i < auth_page_count)&&(i < ODID_AUTH_MAX_PAGES); ++i)
 //		{
 //			UAS_data.AuthValid[i] = 1;
 //		}
-		
+		printf("%lf %lf\r\n", location_data->Latitude, location_data->Longitude);
 		status = ID_OpenDrone_transmit_wifi(utm_data);
+		
+//		if (id >= 2)
+//		{
+//			id = 0;
+//		}
+//		else 
+//		{
+//			id++;
+//		}
+		
 	}
 /*	else if(wifi_tx_flag_2)
 	{
@@ -877,4 +960,344 @@ void ID_OpenDrone_utm_message_pack(ODID_UAS_Data *outdata, struct UTM_data *inda
 	operatorID_data->OperatorIdType = ODID_OPERATOR_ID;
 	strcpy(operatorID_data->OperatorId, "OPERATORID");
 
+}
+
+const double xxa = 6378137.0;
+const double xxf = 0.0033528106647474805;
+const double xxfe = 500000.0;
+const double xxok = 0.9996;
+const double xxrecf = 298.25722356300003;
+const double xxb = 6356752.3142451793;
+const double xxes = 0.0066943799901413156;
+const double xxebs = 0.0067394967422764341;
+const double xxtn = 0.0016792203863837205;
+const double xxap = 6367449.1458234154;
+const double xxbp = 16038.508662976265;
+const double xxcp = 16.832613263150265;
+const double xxdp = 0.021984404134262194;
+const double xxep = 3.1148371055723339e-005;
+
+
+void  GPS_gp2utm(double sphi, double slam, int *izone, double *y, double *x)
+{
+	double t = 0, t2 = 0, t4 = 0, t6 = 0;
+	double c = 0, c2 = 0, c3 = 0, c5 = 0, c7 = 0;
+	double eta = 0, eta2 = 0, eta3 = 0, eta4 = 0;
+	double dlam2 = 0, dlam3 = 0, dlam4 = 0, dlam5 = 0, dlam6 = 0, dlam7 = 0, dlam8 = 0;
+	double olam = 0, dlam = 0, s = 0, sn = 0, tmd = 0;
+	double xt1 = 0, xt2 = 0, xt3 = 0, xt4 = 0, xt5 = 0, xt6 = 0, xt7 = 0, xt8 = 0, xt9 = 0, nfn = 0;
+	double degrad = atan(1.) / 45.;
+	double ftemp = 0;
+	double fS2 = 0, fS4 = 0, fS6 = 0, fS8 = 0;
+
+	sphi *= degrad;
+	slam *= degrad;
+	if ((degrad > 0) || (degrad < 0)) 
+	{
+		*izone = 31 + (int)(slam / degrad / 6.0);
+	}
+
+	olam = (((double)*izone) * 6 - 183)*degrad;
+	dlam = slam - olam;
+	dlam2 = dlam * dlam;
+	dlam3 = dlam2 * dlam;
+	dlam4 = dlam3 * dlam;
+	dlam5 = dlam4 * dlam;
+	dlam6 = dlam5 * dlam;
+	dlam7 = dlam6 * dlam;
+	dlam8 = dlam7 * dlam;
+
+	s = sin(sphi);
+	c = cos(sphi);
+	c2 = c * c;
+	c3 = c2 * c;
+	c5 = c3 * c2;
+	c7 = c5 * c2;
+
+	if ((c > 1.0E-19) || (c < -1.0E-19)) 
+	{
+		t = s / c;
+	}
+	else
+	{
+		c = 1.0E-19;
+		t = s / c;
+	}
+	t2 = t * t;
+	t4 = t2 * t2;
+	t6 = t4 * t2;
+
+	eta = xxebs * c2;
+	eta2 = eta * eta;
+	eta3 = eta2 * eta;
+	eta4 = eta2 * eta2;
+
+	ftemp = sqrt(1.0 - xxes*s*s);
+	if ((ftemp > 0) || (ftemp < 0))
+	{
+		sn = xxa / ftemp;
+	}
+	
+	fS2 = sin(2*sphi);
+	fS4 = sin(4*sphi);
+	fS6 = sin(6*sphi);
+	fS8 = sin(8*sphi);
+	tmd = xxap*sphi - xxbp*fS2 + xxcp*fS4 - xxdp*fS6 + xxep*fS8;
+
+	xt1 = tmd*xxok;
+	xt2 = sn*s*c*xxok / 2.0;
+	xt3 = sn*s*c3*xxok*(5.0 - t2 + 9.0*eta + 4.0*eta2) / 24.0;
+	xt4 = sn*s*c5*xxok*(61.0 - 58.0*t6 + 270.0*eta - 330.0*t2*eta
+		 + 445.0*eta2 + 324.*eta3 - 680*eta2*t2 + 88.*eta4
+		 - 600.0*t2*eta3 - 192.0*t2*eta4) / 720.0;
+	xt5 = sn*s*c7*xxok*(1385.0 - 3111.0*t2 + 543.0*t4 - t6) / 40320.0;
+
+	nfn = 0.;
+	if (sphi < 0.0) 
+	{
+		nfn = 10000000.0;
+	}
+
+	*y = nfn + xt1 + dlam2*xt2 + dlam4*xt3 + dlam6*xt4 + dlam8*xt5;
+
+	xt6 = sn*c*xxok;
+	xt7 = sn*c3*xxok*(1.0 - t2 + eta) / 6.0;
+	xt8 = sn*c5*xxok*(5.0 - 18.0*t6 + 14.0*eta - 58.0*t2*eta
+		 + 13.0*eta2 + 4.0*eta3 - 64.0*eta2*t2 - 24.0*eta4) / 120.0;
+	xt9 = sn*c7*xxok*(61.0 - 479.0*t2 + 179.0*t4 - t6) / 5040.0;
+
+	*x = xxfe + dlam*xt6 + dlam3*xt7 + dlam5*xt8 + dlam7*xt9;
+}
+
+/*==============================================================================================
+
+	INPUT ARGUEMENT :
+	
+		izone	  : UTM zone number 
+		y         : UTM northing (meters)
+		x 		  : UTM easting  (meters)    
+
+
+	OUTPUT ARGUEMENTS :
+
+		sphi      : Latitude  (deg)
+		slam 	  : Longitude (deg)
+
+==============================================================================================*/
+void GPS_utm2gp(double *sphi, double *slam, int izone, double y, double x)
+{
+	double degrad = 0;
+	double olam = 0, dlam = 0, s = 0, c = 0, t = 0, eta = 0, sn = 0, tmd = 0, sr = 0, ftphi = 0, de = 0;
+	double t10 = 0, t11 = 0, t12 = 0, t13 = 0, t14 = 0, t15 = 0, t16 = 0, t17 = 0, nfn = 0;
+	int i = 0;
+	double ftemp = 0;
+	double fS1 = 0, fS2 = 0, fS4 = 0, fS6 = 0, fS8 = 0;
+	double fSqrt = 0;
+
+	degrad = atan(1.) / 45.;
+	nfn = 0.0;
+	if (y < 0.0) {
+		nfn = 10000000.;
+		y = fabs(y);
+	}
+
+	if ((xxok > 0) || (xxok < 0))
+	{
+		tmd = (y - nfn) / xxok;
+	}
+	fS1 = sin(*sphi);
+	fSqrt = sqrt(1. - xxes*fS1*fS1);
+	ftemp = fSqrt*fSqrt*fSqrt;
+	if ((ftemp > 0) || (ftemp < 0))
+	{
+		sr = xxa*(1. - xxes) / ftemp;
+	}
+	if ((sr < 1.0E-19) && (sr > -1.0E-19))
+	{
+		sr = 1.0E-19;
+	}
+	if ((sr > 0) || (sr < 0))
+	{
+		ftphi = tmd / sr;
+	}
+
+	for (i = 0; i < 5; i++) {
+		fS2 = sin(2*ftphi);
+		fS4 = sin(4*ftphi);
+		fS6 = sin(6*ftphi);
+		fS8 = sin(8*ftphi);
+		t10 = xxap*ftphi - xxbp*fS2 + xxcp*fS4 - xxdp*fS6 + xxep*fS8;
+		fS1 = sin(ftphi);
+		fSqrt = sqrt(1. - xxes*fS1*fS1);
+		ftemp = fSqrt*fSqrt*fSqrt;
+		if ((ftemp > 0) || (ftemp < 0))
+		{
+			sr = xxa*(1. - xxes) / ftemp;
+		}
+		if ((sr < 1.0E-19) && (sr > -1.0E-19))
+		{
+			sr = 1.0E-19;
+		}
+		if ((sr > 0) || (sr < 0))
+		{
+			ftphi += (tmd - t10) / sr;
+		}
+	}
+
+	fS1 = sin(ftphi);
+	fSqrt = sqrt(1. - xxes*fS1*fS1);
+	ftemp = fSqrt*fSqrt*fSqrt;
+	if ((ftemp > 0) || (ftemp < 0))
+	{
+		sr = xxa*(1. - xxes) / ftemp;
+	}
+	fS1 = sin(ftphi);
+	ftemp = sqrt(1. - xxes*fS1*fS1);
+	if ((ftemp > 0) || (ftemp < 0))
+	{
+		sn = xxa / ftemp;
+	}
+
+	s = sin(ftphi);
+	c = cos(ftphi);
+	if ((c < 1.0E-19) && (c > -1.0E-19))
+	{
+		c = 1.0E-19;
+	}
+	if ((c > 0) || (c < 0))
+	{
+		t = s / c;
+	}
+	eta = xxebs*c*c;
+
+	de = x - xxfe;
+
+	ftemp = (2.*sr*sn*xxok*xxok);
+	if ((ftemp > 0) || (ftemp < 0))
+	{
+		t10 = t / ftemp;
+	}
+	ftemp = (24.*sr*sn*sn*sn*xxok*xxok*xxok*xxok);
+	if ((ftemp > 0) || (ftemp < 0))
+	{
+		t11 = t*(5. + 3.*t*t + eta - 4.*eta*eta - 9.*t*t*eta) / ftemp;
+	}
+	ftemp = (720.*sr*sn*sn*sn*sn*sn*xxok*xxok*xxok*xxok*xxok*xxok);
+	if ((ftemp > 0) || (ftemp < 0))
+	{
+		t12 = t*(61. + 90.*t*t + 46.*eta + 45.*t*t*t*t - 252.*t*t*eta - 3.*eta*eta + 100.*eta*eta*eta - 66.*t*t*eta*eta - 90.*t*t*t*t*eta
+		  + 88.*eta*eta*eta*eta + 225.*t*t*t*t*eta*eta + 84.*t*t*eta*eta*eta - 192.*t*t*eta*eta*eta*eta) / ftemp;
+	}
+	ftemp = (40320.*sr*sn*sn*sn*sn*sn*sn*sn*xxok*xxok*xxok*xxok*xxok*xxok*xxok*xxok);
+	if ((ftemp > 0) || (ftemp < 0))
+	{
+		t13 = t*(1385. + 3633.*t*t + 4095.*t*t*t*t + 1575.*t*t*t*t*t*t) / ftemp;
+	}
+
+	if (degrad > 0)
+	{
+		*sphi = (ftphi - de*de*t10 + de*de*de*de*t11 - de*de*de*de*de*de*t12 + de*de*de*de*de*de*de*de*t13) / degrad;
+	}
+
+	ftemp = (sn*c*xxok);
+	if ((ftemp > 0) || (ftemp < 0))
+	{
+		t14 = 1. / ftemp;
+	}
+	ftemp = (6.*sn*sn*sn*c*xxok*xxok*xxok);
+	if ((ftemp > 0) || (ftemp < 0))
+	{
+		t15 = (1. + 2.*t*t + eta) / ftemp;
+	}
+	ftemp = (120.*sn*sn*sn*sn*sn*c*xxok*xxok*xxok*xxok*xxok);
+	if ((ftemp > 0) || (ftemp < 0))
+	{
+		t16 = (5. + 6.*eta + 28.*t*t - 3.*eta*eta + 8.*t*t*eta + 24.*t*t*t*t - 4.*eta*eta*eta + 4.*t*t*eta*eta + 24.*t*t*eta*eta*eta) / ftemp;
+	}
+	ftemp = (5040.*sn*sn*sn*sn*sn*sn*sn*c*xxok*xxok*xxok*xxok*xxok*xxok*xxok);
+	if ((ftemp > 0) || (ftemp < 0))
+	{
+		t17 = (61. + 662.*t*t + 1320.*t*t*t*t + 720.*t*t*t*t*t*t) / ftemp;
+	}
+
+	dlam = de*t14 - de*de*de*t15 + de*de*de*de*de*t16 - de*de*de*de*de*de*de*t17;
+
+	olam = ((double)izone * 6.0 - 183)*degrad;
+	if ((degrad > 0) || (degrad < 0))
+	{
+		*slam = (olam + dlam) / degrad;
+	}
+}
+
+
+struct struct_Position circle_path(unsigned char id, double lat, double lon, double radius)
+{
+	int izone = 0;
+	double x = 0, y = 0;
+	double c_x = 0, c_y = 0;
+	double c_lon = 0, c_lat = 0;
+	static unsigned int second = 0;
+	struct struct_Position return_position;
+	
+	static double theta = 0, w = 0.07;	// 'w' is rad/s
+	static double heading = 0;
+	
+	memset(&return_position, 0, sizeof(return_position));
+	/*	INPUT ARGUEMENT :
+		sphi      : Latitude  (deg)
+		slam 	  : Longitude (deg)
+	OUTPUT ARGUEMENTS :
+		izone	  : UTM zone number (see INPUT ARGUEMENT)
+		y         : UTM northing (meters)
+		x 		  : UTM easting  (meters)
+	*/
+	//void  GPS_gp2utm(double sphi, double slam, int *izone, double *y, double *x)
+	GPS_gp2utm(lat, lon, &izone, &y, &x);
+	theta = w * second++;
+	
+	c_x = radius * cos(theta * 3.14 / 180) + x;
+	c_y = radius * sin(theta * 3.14 / 180) + y;
+	
+	/*
+	INPUT ARGUEMENT :
+	
+		izone	  : UTM zone number 
+		y         : UTM northing (meters)
+		x 		  : UTM easting  (meters)    
+
+
+	OUTPUT ARGUEMENTS :
+
+		sphi      : Latitude  (deg)
+		slam 	  : Longitude (deg)
+	*/
+	//GPS_utm2gp(double *sphi,double *slam, int izone, double y, double x)
+	//GPS_utm2gp(&c_lon, &c_lat, izone, c_y, c_x);
+	GPS_utm2gp(&c_lat, &c_lon, izone, c_y, c_x);
+
+//	printf("%lf\r\n", lat);
+//	printf("%lf\r\n", lon);
+	
+//	printf("%lf\r\n", c_lat);
+//	printf("%lf\r\n", c_lon);
+
+	
+	heading = 0;//atan(sqrt((c_x - x)*(c_x - x) + (c_y - y)*(c_y - y))) * 180 / 3.14;
+	
+	//printf("%lf\r\n", heading);
+	
+	/*	double latitude;
+		double longitude;
+		double x;
+		double y;
+		double heading;
+		*/
+	return_position.latitude = c_lat;
+	return_position.longitude = c_lon;
+	return_position.x = c_x;
+	return_position.y = c_y;
+	return_position.heading = heading;
+	return_position.speed = 0;//sqrt((c_x - x)*(c_x - x) + (c_y - y)*(c_y - y)); // m/s
+	
+	return return_position;
 }

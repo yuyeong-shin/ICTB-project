@@ -50,6 +50,13 @@
 
 #define EXAMPLE_CHASE_SPEED_MS (1000)
 
+#ifndef __GNUC__
+#define USED __attribute__((used))
+#else
+#define USED
+#endif
+
+const int USED uxTopPriority  = configMAX_PRIORITIES - 1;
 
 static SemaphoreHandle_t sem_;
 static SemaphoreHandle_t sem_led;
@@ -233,7 +240,7 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 		utm_data.heading = (int)gps->cog;
 		utm_data.speed_kn = (int)gps->speed;
 		//printf("%d\r\n", gps->valid);
-		printf("GPS update\r\n");
+		printf("GPS UPDATE\r\n");
 		if (gps->valid == 1)
 		{
 			if (gps_start_flag == 0)

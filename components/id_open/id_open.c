@@ -43,7 +43,7 @@ unsigned char id = 0;
 void  GPS_gp2utm(double sphi, double slam, int *izone, double *y, double *x);
 void GPS_utm2gp(double *sphi, double *slam, int izone, double y, double x);
 struct struct_Position circle_path(unsigned char id, double lon, double lat, double radius);
-struct struct_Position sPosition[3][2];
+struct struct_Position sPosition[5][2];
 esp_err_t esp_wifi_80211_tx(wifi_interface_t ifx, const void *buffer, int len, bool en_sys_seq);
 /*
 // local function
@@ -657,11 +657,19 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 	}
 	else if (id == 1)
 	{
-		sPosition[id][0] = circle_path(id, 37.5926352, 126.9132056, 126);
+		sPosition[id][0] = circle_path(id, 36.741679, 127.119694, 200);
 	}
 	else if (id == 2)
 	{
-		sPosition[id][0] = circle_path(id, 35.1696094, 129.1345419, 77);
+		sPosition[id][0] = circle_path(id, 36.741679, 127.119694, 300);
+	}
+	else if (id == 3)
+	{
+		sPosition[id][0] = circle_path(id, 36.741679, 127.119694, 400);
+	}
+	else if (id == 4)
+	{
+		sPosition[id][0] = circle_path(id, 36.741679, 127.119694, 20);
 	}
 
 	sPosition[id][0].speed = 13; //sqrt((sPosition[0].x - sPosition[1].x)*(sPosition[0].x - sPosition[1].x)
@@ -717,15 +725,23 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 			//selfID_data->Desc = NULL;
 			if (id == 0)
 			{
-				strcpy(selfID_data->Desc, "TEST_MODULE_NO0111111111");
+				strcpy(selfID_data->Desc, "TEST_MODULE_NO1111111111");
 			}
 			else if (id == 1)
 			{
-				strcpy(selfID_data->Desc, "TEST_MODULE_NO0222222222");
+				strcpy(selfID_data->Desc, "TEST_MODULE_NO2222222222");
 			}
 			else if (id == 2)
 			{
-				strcpy(selfID_data->Desc, "TEST_MODULE_NO0333333333");
+				strcpy(selfID_data->Desc, "TEST_MODULE_NO3333333333");
+			}
+			else if (id == 3)
+			{
+				strcpy(selfID_data->Desc, "TEST_MODULE_NO4444444444");
+			}
+			else if (id == 4)
+			{
+				strcpy(selfID_data->Desc, "TEST_MODULE_NO5555555555");
 			}
 			//strcpy(selfID_data->Desc, "KATECH_TEST_MODULE");
 			
@@ -748,6 +764,10 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 					strcpy(basicID_data->UASID, "2302222");
 				}
 				else if (id == 2)
+				{
+					strcpy(basicID_data->UASID, "2302223");
+				}
+				else
 				{
 					strcpy(basicID_data->UASID, "2302223");
 				}
@@ -774,6 +794,10 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 				{
 					strcpy(operatorID_data->OperatorId, "ASSETTA_USER_03");
 				}
+				else
+				{
+					strcpy(operatorID_data->OperatorId, "ASSETTA_USER_03");
+				}
 				//strcpy(operatorID_data->OperatorId, "KATECH_USER");
 			}
 		}
@@ -784,7 +808,7 @@ int ID_OpenDrone_transmit(struct UTM_data *utm_data)
 		
 		status = ID_OpenDrone_transmit_wifi(utm_data);
 		
-		if (id >= 2)
+		if (id >= 4)
 		{
 			id = 0;
 		}

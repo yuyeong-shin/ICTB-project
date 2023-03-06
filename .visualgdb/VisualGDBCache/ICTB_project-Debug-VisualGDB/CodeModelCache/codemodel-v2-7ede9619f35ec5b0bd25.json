@@ -1829,7 +1829,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ICTB_project.elf::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ICTB_project.elf-DEBUG-12b0d9a0a6903a28f216.json",
+					"jsonFile" : "target-ICTB_project.elf-DEBUG-e93b98e5a20f922cf764.json",
 					"name" : "ICTB_project.elf",
 					"projectIndex" : 0
 				},
@@ -1843,7 +1843,7 @@
 				{
 					"directoryIndex" : 15,
 					"id" : "__idf_app_update::@cc3b426666063acc9674",
-					"jsonFile" : "target-__idf_app_update-DEBUG-2e87243c14df25433c30.json",
+					"jsonFile" : "target-__idf_app_update-DEBUG-d01c30f75e91a10422be.json",
 					"name" : "__idf_app_update",
 					"projectIndex" : 1
 				},
@@ -2011,7 +2011,7 @@
 				{
 					"directoryIndex" : 73,
 					"id" : "__idf_esp_local_ctrl::@d6aad58d2946e56208ef",
-					"jsonFile" : "target-__idf_esp_local_ctrl-DEBUG-c320adf3913bf5bfbe0a.json",
+					"jsonFile" : "target-__idf_esp_local_ctrl-DEBUG-6213d2f4828a88b07143.json",
 					"name" : "__idf_esp_local_ctrl",
 					"projectIndex" : 1
 				},
@@ -2221,7 +2221,7 @@
 				{
 					"directoryIndex" : 93,
 					"id" : "__idf_main::@7368607ed66887415643",
-					"jsonFile" : "target-__idf_main-DEBUG-2f25f75ec3e96761f409.json",
+					"jsonFile" : "target-__idf_main-DEBUG-04324b25e95d17e34929.json",
 					"name" : "__idf_main",
 					"projectIndex" : 1
 				},
@@ -2396,7 +2396,7 @@
 				{
 					"directoryIndex" : 92,
 					"id" : "__idf_wifi_provisioning::@9d7e7ffe1b15746c1098",
-					"jsonFile" : "target-__idf_wifi_provisioning-DEBUG-49f1ca61a9c0eb200c84.json",
+					"jsonFile" : "target-__idf_wifi_provisioning-DEBUG-6da06f634918741fb3d5.json",
 					"name" : "__idf_wifi_provisioning",
 					"projectIndex" : 1
 				},
@@ -2417,7 +2417,7 @@
 				{
 					"directoryIndex" : 23,
 					"id" : "__ldgen_output_sections.ld::@874df54e61e20112dfd4",
-					"jsonFile" : "target-__ldgen_output_sections.ld-DEBUG-7a15a636fe83e8521b8c.json",
+					"jsonFile" : "target-__ldgen_output_sections.ld-DEBUG-f6f7847cdc73821f826e.json",
 					"name" : "__ldgen_output_sections.ld",
 					"projectIndex" : 1
 				},
